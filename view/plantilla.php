@@ -1,4 +1,5 @@
 <?php
+require_once "./config/config.php";
 require_once "./control/views_control.php";
 
 $view = new viewsControl();
@@ -9,3 +10,5 @@ if ($mostrar =="login" || $mostrar =="404") {
 }else {
     include $mostrar;
 }
+
+?>

@@ -7,4 +7,4 @@ const BD_PASSWORD='';
 const BD_CHARSET='utf8';
 
 //ingresar link de proyecto
-const BASE_URIL ='';
+const BASE_URL ='';
