@@ -82,17 +82,17 @@
     <form id="frm_user" action="" method="">
         <div class="card-body">
             <div class="mb-3 row">
-                <label for="Nro_identidad" class="
-                col-sm-2 col-form-label">Nro Documento:</label>
+                <label for="nro_identidad" class="
+                col-sm-2 col-form-label">nro Documento:</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="Nro_identidad" name="Nro_identidad" style="border: 2px solid blue;" required>
+                    <input type="number" class="form-control" id="nro_identidad" name="nro_identidad" style="border: 2px solid blue;" required>
 
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="Razon_Social" class="col-sm-2 col-form-label">Razon Social:</label>
+                <label for="razon_social" class="col-sm-2 col-form-label">razon social:</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="Razon_Social" name="Razon_Social" style="border: 2px solid blue;" required>
+                    <input type="number" class="form-control" id="razon_social" name="razon_social" style="border: 2px solid blue;" required>
                 </div>
             </div>
             <div class="mb-3 row">
@@ -109,39 +109,39 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="Departamento" class="col-sm-2 col-form-label">Departamento:</label>
+                <label for="departamento" class="col-sm-2 col-form-label">departamento:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Departamento" name="Departamento" style="border: 2px solid blue;" required>
+                    <input type="text" class="form-control" id="departamento" name="departamento" style="border: 2px solid blue;" required>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="Provincia" class="col-sm-2 col-form-label">Provincia:</label>
+                <label for="provincia" class="col-sm-2 col-form-label">provincia:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Provincia" name="Provincia" style="border: 2px solid blue;" required>
+                    <input type="text" class="form-control" id="provincia" name="provincia" style="border: 2px solid blue;" required>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="Distrito" class="col-sm-2 col-form-label">Distrito:</label>
+                <label for="distrito" class="col-sm-2 col-form-label">distrito:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Distrito" name="Distrito" style="border: 2px solid blue;" required>
+                    <input type="text" class="form-control" id="distrito" name="distrito" style="border: 2px solid blue;" required>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="Cod_Postal" class="col-sm-2 col-form-label">Codigo Postal:</label>
+                <label for="cod_postal" class="col-sm-2 col-form-label">codigo postal:</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="Cod_Postal" name="Cod_Postal" style="border: 2px solid blue;" required>
+                    <input type="number" class="form-control" id="cod_postal" name="cod_postal" style="border: 2px solid blue;" required>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="Direccion" class="col-sm-2 col-form-label">Direccion:</label>
+                <label for="direccion" class="col-sm-2 col-form-label">direccion:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="Direccion" name="Direccion" style="border: 2px solid blue;" required>
+                    <input type="text" class="form-control" id="direccion" name="direccion" style="border: 2px solid blue;" required>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="Rol" class="col-sm-2 col-form-label">Rol:</label>
+                <label for="rol" class="col-sm-2 col-form-label">rol:</label>
                 <div class="col-sm-8">
-                    <select class="form-control" id="Rol" name="Rol" style="border: 2px solid blue;">
+                    <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;">
                         <option selected>Opciones</option>
                         <option value="Administrador">Administrador</option>
                         <option value="Gerente">Gerente</option>

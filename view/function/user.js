@@ -1,16 +1,16 @@
 function validar_form() {
-    let Nro_identidad = document.getElementById("Nro_identidad").value;
-    let Razon_Social = document.getElementById("Razon_Social").value;
+    let nro_identidad = document.getElementById("nro_identidad").value;
+    let razon_social = document.getElementById("razon_social").value;
     let telefono = document.getElementById("telefono").value;
     let correo = document.getElementById("correo").value;
-    let Departamento = document.getElementById("Departamento").value;
-    let Provincia = document.getElementById("Provincia").value;
-    let Distrito = document.getElementById("Distrito").value;
-    let Cod_Postal = document.getElementById("Cod_Postal").value;
-    let Direccion = document.getElementById("Direccion").value;
-    let Rol = document.getElementById("Rol").value;
+    let departamento = document.getElementById("departamento").value;
+    let provincia = document.getElementById("provincia").value;
+    let distrito = document.getElementById("distrito").value;
+    let cod_postal = document.getElementById("cod_postal").value;
+    let direccion = document.getElementById("direccion").value;
+    let rol = document.getElementById("rol").value;
 
-    if (Nro_identidad == "" || Razon_Social == "" || telefono == "" || correo == "" || Departamento == "" || Provincia == "" || Distrito == "" || Cod_Postal == "" || Direccion == "" || Rol == "") {
+    if (nro_identidad == "" || razon_social == "" || telefono == "" || correo == "" || departamento == "" || provincia == "" || distrito == "" || cod_postal == "" || direccion == "" || rol == "") {
         alert("Error: Existen campos vacios");
         return;
     }
@@ -43,7 +43,14 @@ async function registrarUsuario() {
           cache: 'no-cache',
           body: datos
         });
-        
+        let json = await respuesta.json();
+        //validamos  que json.status sea 0 True
+        if (json.estatus) {
+            alert(json.msg);
+            document.getElementById('frm_user').reset();
+        }else{
+            alert(json.msg);
+        }
     } catch (e) {
         console.log("Error al registrar Usuario:"+e);
     }
