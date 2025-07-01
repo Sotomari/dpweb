@@ -9,8 +9,7 @@
     <Script>
         const base_url = '<?php echo BASE_URL; ?>';
     </Script>
-        
- 
+     
 </head>
 
 <body>
@@ -32,6 +31,7 @@
                         <a class="nav-link" href="#">products</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>categoria">Categorias</a>
                         <a class="nav-link" href="#">Categories</a>
                     </li>
                     <li class="nav-item">
@@ -79,7 +79,7 @@
         <h5 class="card-header text-center">SISTEMA DE VENTAS
     </div>
     </h5>
-    <form id="frm_user" action="" method="">
+    <form id="frm_categoria" action="" method="">
         <div class="card-body">
             <div class="mb-3 row">
                 <label for="nro_identidad" class="
