@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <style>
+        
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, rgb(224, 203, 170) 0%, rgb(208, 241, 118) 100%);
@@ -47,7 +48,7 @@
         }
 
         input {
-            width: 100%;
+            width: 92%;
             padding: 12px 15px;
             border: 2px solid #dfe6e9;
             border-radius: 8px;
@@ -114,25 +115,28 @@
             text-decoration: underline;
         }
     </style>
+    <script>
+       const base_url = '<?php echo BASE_URL; ?>';
+    </script>
 </head>
-
 <body>
     <div class="login-container">
         <img src="view/img/iicono.jpeg" alt="" height="100" width="100">
         <h1>Iniciar sesión</h1>
 
-        <form>
+        <form id="frm_login">
             <div class="input-group">
-                <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" placeholder="Ingresa tu usuario" required>
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" required>
             </div>
 
             <div class="input-group">
-                <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="Ingresa tu contraseña" required>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name ="password" placeholder="Ingresa tu contraseña" required>
             </div>
 
-            <button type="submit" class="login-btn">Ingresar</button>
+
+            <button type="button" onclick="iniciar_sesion();">Ingresar</button>
         </form>
 
         <div class="divider"></div>
@@ -142,6 +146,9 @@
             <a href="#">¿Olvidaste tu contraseña?</a>
         </div>
     </div>
+
+   <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
+
 </body>
 
 </html>

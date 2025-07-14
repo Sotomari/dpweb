@@ -9,6 +9,10 @@ class viewsControl extends viewModel
 
     public function getViewControl()
     {
+        session_start();
+        if (isset($_SECCIO['ventas_id'])) { /*cuando esta activo la vista*/
+            
+        
         if (isset($_GET["views"])) {
             $ruta = explode("/", $_GET["views"]);
             $responce = viewModel::get_view($ruta[0]);
@@ -16,6 +20,11 @@ class viewsControl extends viewModel
             $responce = "index.php";
 
         }
+        
+        }else {
+            $responce ='login';
+        }
+         
         return $responce;
     }
 }

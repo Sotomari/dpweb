@@ -11,11 +11,11 @@ if ($tipo == "registrar") {
         $arrResponse = array('status' => false, 'msg' => 'Error: campos vacíos');
     } else {
         $existe = $objCategoria->existeCategoria($nombre);
-        if ($existe > 0) {
+        if ($existeCategoria > 0) {
             $arrResponse = array('status' => false, 'msg' => 'La categoría ya existe');
         } else {
-            $registrado = $objCategoria->registrar($nombre, $detalle);
-            if ($registrado) {
+            $respuesta = $objCategoria->registrar($nombre,$detalle);
+            if ($respuesta) {
                 $arrResponse = array('status' => true, 'msg' => 'Categoría registrada correctamente');
             } else {
                 $arrResponse = array('status' => false, 'msg' => 'Error al registrar en base de datos');

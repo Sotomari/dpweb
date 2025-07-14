@@ -28,14 +28,37 @@ if ($tipo == "registrar") {
         } else {
 
             $respuesta = $objPersona->registrar($nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol, $password);
-         if ($respuesta){
-            $arrResponse = array('status'=> true, 'msg'=>'Procedemos a registrar');
-         
-         }else{
-            $arrResponse = array('status' => false, 'msg'=>'error, fallo el registro');
-         }
-         
+            if ($respuesta) {
+                $arrResponse = array('status' => true, 'msg' => 'Procedemos a registrar');
+            } else {
+                $arrResponse = array('status' => false, 'msg' => 'error, fallo el registro');
+            }
         }
     }
     echo json_encode($arrResponse);
+}
+/* para iniciar sesion*/
+if ($tipo == "iniciar_sesion") {
+    $nro_identidad = $_POST['username'];
+    $password = $_POST['password'];
+    // Validar que no estén vacíos
+    if ($nro_identidad == "" || $password == "") {
+        $respuesta = array('status' => false, 'msg' => 'Error, campos vacios');
+    } else {
+        $existePersona = $objPersona->existePersona($nro_identidad);
+        if (!$existePersona) {
+            $respuesta = array('status' => false, 'msg' => 'Error, usuario no existe');
+        } else {
+            $persona = $objPersona->buscarPersonaPorNroIdentidad($nro_identidad);
+            if (password_verify($password, $persona->password)) {
+                session_start();
+                $_SESSION['ventas_id'] = $persona->id;
+                $_SESSION['ventas_usuario'] = $persona->razon_social;
+                  $respuesta = array('status' => true, 'msg' => ' usuario  existe');
+            }else {
+                  $respuesta = array('status' => false, 'msg' => 'Error, usuario no existe');
+            }
+        }
+    }
+    echo json_encode($respuesta);
 }

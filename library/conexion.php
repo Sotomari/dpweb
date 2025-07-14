@@ -10,7 +10,7 @@ class Conexion
         $mysql->set_charset(BD_CHARSET);
         date_default_timezone_set("America/Lima");
         if (mysqli_connect_errno()) {
-            echo "error de Conexion:" . mysqli_connect_errno();
+            echo "error de Conexion:" .mysqli_connect_errno();
         }
         return $mysql;
     }

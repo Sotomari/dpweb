@@ -5,7 +5,7 @@ require_once "./control/views_control.php";
 $view = new viewsControl();
 $mostrar = $view->getViewControl();
 
-if ($mostrar =="login" || $mostrar =="404") {
+if ($mostrar =="login" || $mostrar =="404" || $mostrar== "new-user") {
     require_once "./view/".$mostrar.".php";
 }else {
     include "./view/include/header.php"; // cargar el header

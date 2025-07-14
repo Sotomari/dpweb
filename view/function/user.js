@@ -37,26 +37,59 @@ async function registrarUsuario() {
         //capturaran campos de formulario (HTML)
         const datos = new FormData(frm_user);
         //enviar datos al controlador
-        let respuesta =await fetch(base_url +'control/UsuarioController.php?tipo=registrar',{
-          method: 'POST',
-          model: 'cors',
-          cache: 'no-cache',
-          body: datos
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=registrar', {
+            method: 'POST',
+            model: 'cors',
+            cache: 'no-cache',
+            body: datos
         });
         let json = await respuesta.json();
         //validamos  que json.status sea 0 True
         if (json.estatus) {
             alert(json.msg);
             document.getElementById('frm_user').reset();
-        }else{
+        } else {
             alert(json.msg);
         }
     } catch (e) {
-        console.log("Error al registrar Usuario:"+e);
+        console.log("Error al registrar Usuario:" + e);
     }
+}
+async function iniciar_sesion() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    if (username == "" || password == "") {
+
+        alert("Error, campos vacios!");
+        Swal.fire("SweetAlert2 is working!");
+
+    }
+    
+    try {
+        const datos = new FormData(frm_login);
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=iniciar_sesion', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+
+        let json = await respuesta.json();
+        //validamos  que json.status sea 0 True
+        if (json.status) {
+            location.replace(base_url + 'new-user');
+
+        } else {
+            alert(json.msg);
+        }
+   
+    
+} catch (error) {
+    console.log(error);
+
+}
 
 }
 
 
-    
- 
+

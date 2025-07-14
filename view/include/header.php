@@ -11,7 +11,6 @@
     </Script>
      
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: yellow;">
         <div class="container-fluid">
@@ -32,7 +31,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo BASE_URL; ?>categoria">Categorias</a>
-                        <a class="nav-link" href="#">Categories</a>
+                     
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Clients</a>
