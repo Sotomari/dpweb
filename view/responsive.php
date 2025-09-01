@@ -18,7 +18,7 @@
       <div class="col-12 col-sm-6 col-md-3 col-lg-2 p-0"><img src="img/moto.jpg" alt="" class="img-fluid w-100"></div>
       <div class="col-12 col-sm-6 col-md-3 col-lg-2 p-0"><img src="img/moto.jpg" alt="" class="img-fluid w-100"></div>
       <div class="col-12 col-sm-6 col-md-3 col-lg-2 p-0"><img src="img/moto.jpg" alt="" class="img-fluid w-100"></div>
-      <div class="col-12 col-sm-6 col-md-3 col-lg-2 p-0"><img src="img/ moto.jpg" alt="" class="img-fluid w-100"></div>
+      <div class="col-12 col-sm-6 col-md-3 col-lg-2 p-0"><img src="img/moto.jpg" alt="" class="img-fluid w-100"></div>
     </div>
 
 

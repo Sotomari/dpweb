@@ -12,13 +12,13 @@ if ($tipo == "registrar") {
     } else {
         $existe = $objCategoria->existeCategoria($nombre);
         if ($existeCategoria > 0) {
-            $arrResponse = array('status' => false, 'msg' => 'La categoría ya existe');
+            $arrResponse = array('status' => false, 'msg' => ' Eroor, nro  categoría ya existe');
         } else {
-            $respuesta = $objCategoria->registrar($nombre,$detalle);
+            $respuesta = $objCategoria->registrar($nombre, $detalle);
             if ($respuesta) {
                 $arrResponse = array('status' => true, 'msg' => 'Categoría registrada correctamente');
             } else {
-                $arrResponse = array('status' => false, 'msg' => 'Error al registrar en base de datos');
+                $arrResponse = array('status' => false, 'msg' => 'Error , fallo en registro');
             }
         }
     }

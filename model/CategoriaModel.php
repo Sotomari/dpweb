@@ -18,7 +18,7 @@ class CategoriaModel{
     }
 
     public function existeCategoria($nombre){
-        $consulta = "SELECT* FROM categoria where nombre = '$nombre'";
+        $consulta = "SELECT* FROM categoria WHERE nombre = '$nombre'";
         $sql = $this->conexion->query($consulta);
         return $sql->num_rows;
     }

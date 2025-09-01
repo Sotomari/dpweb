@@ -3,10 +3,10 @@
  <div class="container-fluid"> 
     <div class="card">
         <h5 class="card-header text-center">REGISTRO DE USUARIO</h5>
-    </div>
+   
     
-    
-    <form id="frm_categoria" action="" method="">
+    <!--<form id="frm_user" action="" method="post">-->
+    <form id="frm_user">
         <div class="card-body">
             <div class="mb-3 row">
                 <label for="nro_identidad" class="
@@ -19,11 +19,11 @@
             <div class="mb-3 row">
                 <label for="razon_social" class="col-sm-2 col-form-label">razon social:</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="razon_social" name="razon_social" style="border: 2px solid blue;" required>
+                    <input type="text" class="form-control" id="razon_social" name="razon_social" style="border: 2px solid blue;" required>
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="telelefono" class="col-sm-2 col-form-label">telefono:</label>
+                <label for="telefono" class="col-sm-2 col-form-label">telefono:</label>
                 <div class="col-sm-8">
                     <input type="number" class="form-control" id="telefono" name="telefono" style="border: 2px solid blue;" required>
                 </div>
@@ -68,8 +68,7 @@
             <div class="mb-3 row">
                 <label for="rol" class="col-sm-2 col-form-label">rol:</label>
                 <div class="col-sm-8">
-                    <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;">
-                        <option selected>Opciones</option>
+                    <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" required>
                         <option value="Administrador">Administrador</option>
                         <option value="Gerente">Gerente</option>
                         <option value="Trabajador">Trabajador</option>
