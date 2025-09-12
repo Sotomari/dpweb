@@ -4,11 +4,11 @@ require_once("../library/conexion.php");
 // tendra todas las funciones relacionadas con la tabla persona 
 class UsuarioModel
 {
-     private $conexion;
-   
+    private $conexion;
+
     function __construct()
     {
-       
+
         $this->conexion = new Conexion();
         // Se establece la conexión y se guarda en el atributo $conexion
         $this->conexion = $this->conexion->connect();
@@ -19,7 +19,7 @@ class UsuarioModel
         $consulta = "INSERT INTO persona (nro_identidad, razon_social, telefono, correo, departamento, provincia, distrito, cod_postal, direccion, rol, password) VALUES ('$nro_identidad', '$razon_social', '$telefono', '$correo', '$departamento', '$provincia', '$distrito',' $cod_postal', '$direccion', '$rol', '$password')";
         // Se ejecuta la consulta
         $sql = $this->conexion->query($consulta);
-       
+
         if ($sql) {
             $sql = $this->conexion->insert_id;
         } else {
@@ -41,27 +41,49 @@ class UsuarioModel
         // devuelve los datos como un objeto
         return $sql->fetch_object();
     }
-    public function verUsuarios() {
+    public function verUsuarios()
+    {
         $arr_usuarios = array();
         $consulta = "SELECT * FROM persona";
         $sql = $this->conexion->query($consulta);
 
-   
+
         while ($objeto = $sql->fetch_object()) {
-           array_push($arr_usuarios, $objeto);
-        
+            array_push($arr_usuarios, $objeto);
         }
         return $arr_usuarios;
     }
     //creando una nueva funcion ver
-    public function ver($id){
+    public function ver($id)
+    {
         $consulta = "SELECT * FROM persona WHERE id='$id'";
         $sql = $this->conexion->query($consulta);
         //convierte en objeto
         return $sql->fetch_object();
-
+    }
+    public function actualizar($id_persona, $nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol)
+    {
+        $consulta = "UPDATE persona SET nro_identidad='$nro_identidad', razon_social='$razon_social', telefono='$telefono', correo='$correo', departamento='$departamento',
+        provincia='$provincia', distrito='$distrito', cod_postal='$cod_postal', direccion='$direccion', rol='$rol' WHERE  id='$id_persona'";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+    public function eliminar($id_persona){
+    $consulta = "DELETE FROM persona WHERE id='$id_persona'";
+    $sql = $this->conexion->query($consulta);
+    return $sql;
     }
 }
 
+    
 
- 
+
+    
+     
+    
+
+
+
+
+
+

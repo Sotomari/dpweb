@@ -1,5 +1,7 @@
 <div class="container">
+    <center>
     <h1>Lista de Usuarios</h1>
+    </center>
     <table class="table table-bordered table-strip">
 
         <thead>

@@ -71,7 +71,7 @@
                 <div class="mb-3 row">
                     <label for="rol" class="col-sm-2 col-form-label">rol:</label>
                     <div class="col-sm-8">
-                        <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;">
+                        <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" require>
                            
                             <option value="Administrador">Administrador</option>
                             <option value="Gerente">Gerente</option>
@@ -90,6 +90,7 @@
 </div>
 <!-- FIN DE CUERPO DE PAGINA-->
 <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>
+
 <script>
     edit_user();
 </script>

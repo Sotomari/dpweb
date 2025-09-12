@@ -1,5 +1,5 @@
 // Validación y envío del formulario de usuario
-function validar_form() {
+function validar_form(tipo) {
     // Obtener todos los campos
     let nro_identidad = document.getElementById("nro_identidad").value;
     let razon_social = document.getElementById("razon_social").value;
@@ -20,9 +20,15 @@ function validar_form() {
         });
         return;
     }
+    if (tipo == "nuevo") {
+        registrarUsuario();
 
+    }
+    if (tipo == "actualizar") {
+        actualizarUsuario();
 
-    registrarUsuario();
+    }
+
 }
 
 
@@ -32,7 +38,7 @@ if (document.querySelector('#frm_user')) {
     let frm_user = document.querySelector('#frm_user');
     frm_user.onsubmit = function (e) {
         e.preventDefault();
-        validar_form();
+        validar_form("nuevo");
     }
 }
 // Función para registrar usuario
@@ -121,8 +127,12 @@ async function view_users() {
                     <td>${user.estado || ''}</td>
                       <td>
                       <a href="`+ base_url + `edit-user/` + user.id + `">Editar</a>
-                      </td>
-                     </tr>`;
+                    
+<button onclick="btn_eliminar(` + user.id + `);" class="btn btn-eliminar btn-danger">Eliminar</button>
+
+
+                  </td>
+                  </tr>`;
             });
             document.getElementById('content_users').innerHTML = html;
         } else {
@@ -157,19 +167,78 @@ async function edit_user() {
         }
         document.getElementById('nro_identidad').value = json.data.nro_identidad;
         document.getElementById('razon_social').value = json.data.razon_social;
-        document.getElementById('telefono').value = json.data.telefono
-        document.getElementById('correo').value = json.data.correo
-        document.getElementById('departamento').value = json.data.departamento
-        document.getElementById('provincia').value = json.data.provincia
-        document.getElementById('distrito').value = json.data.distrito
-        document.getElementById('cod_postal').value = json.data.cod_postal
-        document.getElementById('direccion').value = json.data.direccion
-        document.getElementById('rol').value = json.data.rol
-    
+        document.getElementById('telefono').value = json.data.telefono;
+        document.getElementById('correo').value = json.data.correo;
+        document.getElementById('departamento').value = json.data.departamento;
+        document.getElementById('provincia').value = json.data.provincia;
+        document.getElementById('distrito').value = json.data.distrito;
+        document.getElementById('cod_postal').value = json.data.cod_postal;
+        document.getElementById('direccion').value = json.data.direccion;
+        document.getElementById('rol').value = json.data.rol;
 
 
     } catch (error) {
         console.log('oops, ucurrió un error' + error);
     }
 
+}
+if (document.querySelector('#frm_edit_user')) {
+    //evita que se envie el formulario
+    let frm_user = document.querySelector('#frm_edit_user');
+    frm_user.onsubmit = function (e) {
+        e.preventDefault();
+        validar_form("actualizar");
+    }
+}
+
+async function actualizarUsuario() {
+    const datos = new FormData(frm_edit_user);
+    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=actualizar', {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        body: datos
+    });
+    json = await respuesta.json();
+    if (!json.status) {
+        alert("Oooops, ocurrio un error al actualizar, intentelo nuevamente");
+        console.log(json.msg);
+        return;
+    } else {
+        alert(json.msg);
+    }
+}
+
+
+
+
+
+async function btn_eliminar(id) {
+    if (window.confirm("delemeter")) {
+        eliminar(id);
+    }
+
+
+
+}
+
+
+async function eliminar(id) {
+    let datos = new FormData();
+    datos.append('id_persona', id);
+    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=eliminar', {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        body: datos
+    });
+    json = await respuesta.json();
+    if (!json.status) {
+        alert("Oooops, ocurrio un error al actualizar, intentelo nuevamente");
+        console.log(json.msg);
+        return;
+    } else {
+        alert(json.msg);
+        location.replace(base_url + 'users');
+    }
 }

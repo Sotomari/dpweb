@@ -27,10 +27,10 @@
                          <a class="nav-link" href="<?php echo BASE_URL; ?>users">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">products</a>
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>products">products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="<?php echo BASE_URL; ?>categoria">Categorias</a>
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>new-categoria">Categorias</a>
                      
                     </li>
                     <li class="nav-item">
