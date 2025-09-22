@@ -13,7 +13,6 @@
                 col-sm-2 col-form-label">nro Documento:</label>
                 <div class="col-sm-8">
                     <input type="number" class="form-control" id="nro_identidad" name="nro_identidad" style="border: 2px solid blue;" required>
-
                 </div>
             </div>
             <div class="mb-3 row">

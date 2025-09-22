@@ -4,7 +4,7 @@ class viewModel
    // Método protegido y estático que devuelve la ruta o nombre de la vista solicitada
     protected static function get_view($view)
     {
-        $white_list = ["home", "products", "new-product", "new-user", "new-categoria", "login", "users", "edit-user"];
+        $white_list = ["home", "products", "new-product", "edit-product", "new-user", "category", "new-categoria", "edit-category", "login", "users", "edit-user"];
     // Verifica si la vista solicitada está en la lista blanca
         if (in_array($view, $white_list)) {
     // Verifica si el archivo PHP correspondiente a la vista existe en la carpeta "view"

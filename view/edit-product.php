@@ -1,12 +1,20 @@
 <!-- INICIO DE CUERPO DE PAGINA-->
 <div class="container-fluid">
     <div class="card">
-        <h5 class="card-header text-center">REGISTRO DE PRODUCTOS</h5>
+        <h5 class="card-header text-center">EDITAR DATOS DEL PRODUCTOS</h5>
+        <?php
+        if (isset($_GET["views"])) {
+            $ruta = explode("/", $_GET["views"]);
+            //echo $ruta[1];
+        }
+        ?>
+      <form id="frm_edit_product" action="" method="POST">
+    <input type="hidden" id="id_producto" name="id_producto" value="<?= $ruta[1]; ?>">
 
-        <form id="frm_product" enctype="multipart/form-data">
             <div class="card-body">
-
                 <div class="mb-3 row">
+
+                  <div class="mb-3 row">
                     <label for="codigo" class="col-sm-2 col-form-label">Código:</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" id="codigo" name="codigo" style="border: 2px solid blue;" required>
@@ -78,17 +86,24 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success">Registrar</button>
-                    <button type="reset" class="btn btn-info">Limpiar</button>
-                    <a href="<?= BASE_URL ?>category" class="btn btn-danger">Cancelar</a>
+                        <div class="mb-3 row">
+                            <label class="col-sm-4 col-form-label"></label>
+                            <div class="col-sm-8">
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                                <a href="<?= BASE_URL ?>products" class="btn btn-warning">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
         </form>
     </div>
 </div>
-<!-- FIN DE CUERPO DE PAGINA-->
 
+</div>
+<!-- FIN DE CUERPO DE PAGINA-->
 <script src="<?php echo BASE_URL; ?>view/function/product.js"></script>
+
+
+<script>
+    edit_product();
+</script>

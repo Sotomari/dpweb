@@ -8,7 +8,6 @@ class UsuarioModel
 
     function __construct()
     {
-
         $this->conexion = new Conexion();
         // Se establece la conexión y se guarda en el atributo $conexion
         $this->conexion = $this->conexion->connect();
@@ -61,6 +60,7 @@ class UsuarioModel
         //convierte en objeto
         return $sql->fetch_object();
     }
+    
     public function actualizar($id_persona, $nro_identidad, $razon_social, $telefono, $correo, $departamento, $provincia, $distrito, $cod_postal, $direccion, $rol)
     {
         $consulta = "UPDATE persona SET nro_identidad='$nro_identidad', razon_social='$razon_social', telefono='$telefono', correo='$correo', departamento='$departamento',

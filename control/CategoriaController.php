@@ -1,24 +1,30 @@
 <?php
 require_once("../model/CategoriaModel.php");
+
 $objCategoria = new CategoriaModel();
 
 $tipo = $_GET['tipo'];
+
 if ($tipo == "registrar") {
+    //print_r($_POST);
     $nombre = $_POST['nombre'];
     $detalle = $_POST['detalle'];
 
+    /* validar que los campos no esten vacios*/
     if ($nombre == "" || $detalle == "") {
-        $arrResponse = array('status' => false, 'msg' => 'Error: campos vacíos');
+
+        $arrResponse = array('status' => false, 'msg' => 'Error, campos vacios');
     } else {
-        $existe = $objCategoria->existeCategoria($nombre);
+        // validar si existe categoria con el mismo nombre
+        $existeCategoria = $objCategoria->existeCategoria($nombre);
         if ($existeCategoria > 0) {
-            $arrResponse = array('status' => false, 'msg' => ' Eroor, nro  categoría ya existe');
+            $arrResponse = array('status' => false, 'msg' => 'Error: nombre ya existe');
         } else {
             $respuesta = $objCategoria->registrar($nombre, $detalle);
             if ($respuesta) {
-                $arrResponse = array('status' => true, 'msg' => 'Categoría registrada correctamente');
+                $arrResponse = array('status' => true, 'msg' => 'REGISTRADO CORRECTAMENTE');
             } else {
-                $arrResponse = array('status' => false, 'msg' => 'Error , fallo en registro');
+                $arrResponse = array('status' => false, 'msg' => 'ERROR: FALLO AL REGISTAR');
             }
         }
     }
@@ -26,4 +32,83 @@ if ($tipo == "registrar") {
 }
 
 
+/* ver categorias registrados*/
+if ($tipo == "ver_categorias") {
+    $categorias = $objCategoria->verCategorias();
+    echo json_encode($categorias);
+    exit;
+}
 
+
+/*ver para editar */
+if ($tipo == "ver") {
+    $id_categoria = $_POST['id_categoria'];
+    $respuesta = array('status' => false, 'msg' => '');
+    $categoria = $objCategoria->ver($id_categoria);
+
+    if ($categoria) {
+        $respuesta['status'] = true;
+        $respuesta['data'] = $categoria; //corregido
+    } else {
+        $respuesta['msg'] = 'Error, la categoría no existe';
+    }
+    echo json_encode($respuesta);
+    exit;
+}
+
+/*para actualizar*/
+if ($tipo == "actualizar") {
+    //print_r($_POST);
+    $id_categoria = $_POST['id_categoria'];
+    $nombre = $_POST['nombre'];
+    $detalle = $_POST['detalle'];
+    
+    if ($id_categoria == "" || $nombre == "" || $detalle == "" ) {
+
+        $arrResponse = array('status' => false, 'msg' => 'Error, campos vacios');
+    } else {
+        $existeID = $objCategoria->ver($id_categoria);
+        if (!$existeID) {
+            //devolver respuesta
+            $arrResponse = array('status' => false, 'msg' => 'Error, categoria no existe en BD');
+            echo json_encode($arrResponse);
+            //cerrar funcion
+            exit;
+        } else {
+            //actualizar
+            $actualizar = $objCategoria->actualizar($id_categoria, $nombre, $detalle);
+            if ($actualizar) {
+                $arrResponse = array('status' => true, 'msg' => "Actualizado correctamente");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => $actualizar);
+            }
+            echo json_encode($arrResponse);
+            exit;
+        }
+    }
+}
+
+
+// Metodo para Elimar datos de Usuario
+if ($tipo == "eliminar") {
+    // El JS envía 'id', no 'id_persona'
+    $id_categoria = isset($_POST['id']) ? $_POST['id'] : '';
+
+    if ($id_categoria == "") {
+        $arrResponse = array('status' => false, 'msg' => 'Error, ID vacío');
+    } else {
+        $existeId = $objCategoria->ver($id_categoria);
+        if (!$existeId) {
+            $arrResponse = array('status' => false, 'msg' => 'Error, categoria no existe en Base de Datos!!');
+        } else {
+            $eliminar = $objCategoria->eliminar($id_categoria);
+            if ($eliminar) {
+                $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => 'Error al eliminar');
+            }
+        }
+    }
+    echo json_encode($arrResponse);
+    exit;
+}

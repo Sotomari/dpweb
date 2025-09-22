@@ -2,6 +2,7 @@
     <center>
         <h1>Lista de Productos </h1>
     </center>
+     
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -11,8 +12,10 @@
                 <th>Categoría</th>
                 <th>Precio</th>
                 <th>Stock</th>
-                <th>Estado</th>
+                <th>fecha_vencimiento</th>
                 <th>Acciones</th>
+
+
             </tr>
         </thead>
         <tbody id="content_products">
@@ -23,6 +26,3 @@
 
 <!-- Llamamos al archivo JS para manejar los productos -->
 <script src="<?= BASE_URL ?>view/function/product.js"></script>
-<!--<script>view_product();</script>-->
-
-

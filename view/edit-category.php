@@ -1,11 +1,17 @@
-
-
 <!-- INICIO DE CUERPO DE PAGINA-->
- 
- <div class="container-fluid"> 
-        <div class="card">
-        <h5 class="card-header text-center bg-primary text-white">REGISTRAR CATEGORÍA</h5>
-        <form id="frm_categoria" action="" method="">
+<div class="container-fluid">
+    <div class="card">
+        <h5 class="card-header text-center">EDITAR CATEGORIA</h5>
+        <?php
+        if (isset($_GET["views"])) {
+            $ruta = explode("/", $_GET["views"]);
+            //echo $ruta[1];
+        }
+        ?>
+
+        <form id="frm_edit_category" action="" method="">
+            <input type="hidden" id="id_categoria" name="id_categoria" value="<?= $ruta[1]; ?>">
+            
             <div class="card-body">
                 <div class="mb-3 row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
@@ -19,16 +25,16 @@
                         <textarea class="form-control" id="detalle" name="detalle" rows="3" style="border: 2px solid blue;" required></textarea>
                     </div>
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success">Registrar</button>
-                    <button type="reset" class="btn btn-info">Limpiar</button>
-                      <a href="<?= BASE_URL ?>category" class="btn btn-danger">Cancelar</a>
-                </div>
+             
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Actualizar</button>
+                <a href="<?= BASE_URL ?>category" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
-    
-    </div>
-    <!-- FIN DE CUERPO DE PAGINA-->
     <script src="<?php echo BASE_URL; ?>view/function/category.js"></script>
-
+    
+    <script>
+        edit_category();
+    </script>

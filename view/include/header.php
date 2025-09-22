@@ -9,8 +9,9 @@
     <Script>
         const base_url = '<?php echo BASE_URL; ?>';
     </Script>
-     
+
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: yellow;">
         <div class="container-fluid">
@@ -24,15 +25,21 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                         <a class="nav-link" href="<?php echo BASE_URL; ?>users">Users</a>
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>users">Users</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>new-product">product</a>
+                    </li>
+                      <li class="nav-item">
                         <a class="nav-link" href="<?php echo BASE_URL; ?>products">products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo BASE_URL; ?>new-categoria">Categorias</a>
-                     
                     </li>
+                      <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>category">Category</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#">Clients</a>
                     </li>
@@ -44,7 +51,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            
+
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Action</a></li>
