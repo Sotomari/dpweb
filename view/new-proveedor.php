@@ -1,12 +1,10 @@
-<!-- INICIO DE CUERPO DE PAGINA-->
+
 <div class="container-fluid">
     <div class="card">
-        <h5 class="card-header text-center">REGISTRO DE USUARIO</h5>
+       <h5 class="card-header text-center bg-primary text-white">REGISTRAR PROVEEDORES</h5>
 
-
-        <!--<form id="frm_user" action="" method="post">-->
-        <form id="frm_user" action="" method="">
-            <div class="card-body">
+        <form id="frm_user">
+          <div class="card-body">
                 <div class="mb-3 row">
                     <label for="nro_identidad" class="
                 col-sm-2 col-form-label">nro Documento:</label>
@@ -67,25 +65,19 @@
                     <label for="rol" class="col-sm-2 col-form-label">rol:</label>
                     <div class="col-sm-8">
                         <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" required>
-                            <option value="" disabled selected>seleccione</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Gerente">Gerente</option>
-                            <option value="Trabajador">Trabajador</option>
                             <option value="Proveedor">Proveedor</option>
-
                         </select>
                     </div>
                 </div>
-
                 <div class="text-center">
                     <button type="submit" class="btn btn-success">Registrar</button>
                     <button type="reset" class="btn btn-info">Limpiar</button>
-                    <!--<button type="button" class="btn btn-danger">Cancelar</button>-->
-                    <a href="<?= BASE_URL ?>users" class="btn btn-danger">Cancelar</a>
+                   <!--<button type="button" class="btn btn-danger" onclick="location.href='<?= BASE_URL ?>proveedores'">Cancelar</button>-->
+                     <a href="<?=BASE_URL ?>users" class="btn btn-danger">Cancelar</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<!-- FIN DE CUERPO DE PAGINA-->
+    <!-- FIN DE CUERPO DE PAGINA-->
 <script src="<?php echo BASE_URL; ?>view/function/user.js"></script>

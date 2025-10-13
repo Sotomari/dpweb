@@ -1,6 +1,11 @@
+<!-- Contenedor donde se mostrará el formulario -->
+<div id="formularioProveedor" style="display:none;">
+    <?php include_once "form-proveedor.php"; ?>
+</div>
+
 <div class="container">
     <center>
-    <h1>Lista de Usuarios</h1>
+        <h1>Lista de Proveedores</h1>
     </center>
     <table class="table table-bordered table-strip">
 
@@ -16,7 +21,7 @@
 
             </tr>
         </thead>
-        <tbody id="content_user">
+        <tbody id="content_proveedor">
 
         </tbody>
     </table>

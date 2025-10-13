@@ -1,7 +1,7 @@
 <!-- INICIO DE CUERPO DE PAGINA-->
 <div class="container-fluid">
     <div class="card">
-        <h5 class="card-header text-center">EDITAR DATOS DEL PRODUCTOS</h5>
+        <h5 class="card-header text-center bg-primary text-white">EDITAR DATOS DEL PRODUCTOS</h5>
         <?php
         if (isset($_GET["views"])) {
             $ruta = explode("/", $_GET["views"]);
@@ -102,7 +102,6 @@
 </div>
 <!-- FIN DE CUERPO DE PAGINA-->
 <script src="<?php echo BASE_URL; ?>view/function/product.js"></script>
-
 
 <script>
     edit_product();

@@ -21,10 +21,7 @@ if ($tipo == "ver_productos") {
     }
     echo json_encode($respuesta);
 }
-
-
-
-
+//registrar
 if ($tipo == "registrar") {
     //print_r($_POST);
     $codigo = $_POST['codigo'];

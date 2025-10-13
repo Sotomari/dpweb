@@ -34,9 +34,12 @@ if ($tipo == "registrar") {
 
 /* ver categorias registrados*/
 if ($tipo == "ver_categorias") {
+    $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
     $categorias = $objCategoria->verCategorias();
-    echo json_encode($categorias);
-    exit;
+    if (count($categorias)) {
+        $respuesta = array('status' => true, 'msg' => '', 'data' => $categorias);
+    }
+    echo json_encode($respuesta);
 }
 
 
@@ -92,23 +95,13 @@ if ($tipo == "actualizar") {
 // Metodo para Elimar datos de Usuario
 if ($tipo == "eliminar") {
     // El JS envía 'id', no 'id_persona'
-    $id_categoria = isset($_POST['id']) ? $_POST['id'] : '';
-
-    if ($id_categoria == "") {
-        $arrResponse = array('status' => false, 'msg' => 'Error, ID vacío');
-    } else {
-        $existeId = $objCategoria->ver($id_categoria);
-        if (!$existeId) {
-            $arrResponse = array('status' => false, 'msg' => 'Error, categoria no existe en Base de Datos!!');
-        } else {
-            $eliminar = $objCategoria->eliminar($id_categoria);
-            if ($eliminar) {
-                $arrResponse = array('status' => true, 'msg' => "Eliminado correctamente");
-            } else {
-                $arrResponse = array('status' => false, 'msg' => 'Error al eliminar');
-            }
-        }
+    $id_categoria = $_POST['id_categoria'];
+    $respuesta = array('status' => false, 'msg' => '');
+    $resultado = $objCategoria->eliminar($id_categoria);
+    if ($resultado) {
+        $respuesta = array('status' => true, 'msg' => 'Eliminado Correctamente');
+    }else {
+        $respuesta = array('status' => false, 'msg' => $resultado);
     }
-    echo json_encode($arrResponse);
-    exit;
+    echo json_encode($respuesta);
 }

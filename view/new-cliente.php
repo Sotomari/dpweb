@@ -1,15 +1,11 @@
-<!-- INICIO DE CUERPO DE PAGINA-->
 <div class="container-fluid">
     <div class="card">
-        <h5 class="card-header text-center">REGISTRO DE USUARIO</h5>
+         <h5 class="card-header text-center bg-primary text-white">REGISTRO DE CLIENTES</h5>
 
-
-        <!--<form id="frm_user" action="" method="post">-->
         <form id="frm_user" action="" method="">
-            <div class="card-body">
+         <div class="card-body">
                 <div class="mb-3 row">
-                    <label for="nro_identidad" class="
-                col-sm-2 col-form-label">nro Documento:</label>
+                    <label for="nro_identidad" class=" col-sm-2 col-form-label">nro Documento:</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" id="nro_identidad" name="nro_identidad" style="border: 2px solid blue;" required>
                     </div>
@@ -66,22 +62,17 @@
                 <div class="mb-3 row">
                     <label for="rol" class="col-sm-2 col-form-label">rol:</label>
                     <div class="col-sm-8">
-                        <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" required>
-                            <option value="" disabled selected>seleccione</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Gerente">Gerente</option>
-                            <option value="Trabajador">Trabajador</option>
-                            <option value="Proveedor">Proveedor</option>
-
+                        <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" required readonly>
+                         <option value="Cliente" selected>Cliente</option>
                         </select>
                     </div>
                 </div>
-
                 <div class="text-center">
                     <button type="submit" class="btn btn-success">Registrar</button>
                     <button type="reset" class="btn btn-info">Limpiar</button>
-                    <!--<button type="button" class="btn btn-danger">Cancelar</button>-->
-                    <a href="<?= BASE_URL ?>users" class="btn btn-danger">Cancelar</a>
+                    <!--<button type="button" class="btn btn-danger" onclick="location.href='<?= BASE_URL ?>clientes'">Cancelar</button>-->
+
+                   <a href="<?= BASE_URL ?>users" class="btn btn-danger">Cancelar</a>
                 </div>
             </div>
         </form>

@@ -11,38 +11,104 @@
     </Script>
 
 </head>
+<style>
+    body {
+        background: #d41f3dff;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #06df06ff, #ac1212ff);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #6ab5fcff, #78ecfcff);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    .nav-link {
+        color: black;
+
+    }
+
+.logo {
+    width: 100px; /* Tamaño del contenedor reducido */
+    height: 100px;
+    border-radius: 50%; /* Hace el contenedor perfectamente circular */
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    display: flex;
+    align-items: center; /* Centra verticalmente la imagen */
+    justify-content: center; /* Centra horizontalmente la imagen */
+    box-shadow: 0 10px 25px rgba(36, 35, 35, 0.6);
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+    margin-left: 40px; /* Alineación hacia la derecha (puedes cambiar según el diseño) */
+    position: relative;
+}
+
+.logo img {
+    width: 90%; /* Hace que la imagen encaje perfectamente dentro del círculo */
+    height: 90%;
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+    border-radius: 50%; /* Asegura que la imagen también sea circular */
+    border: 2px solid white; /* Borde decorativo */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Sombra suave */
+}
+</style>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: yellow;">
+
+        <div class="logo">
+            <img src="view/include/img/logo.png" alt="Logo ">
+        </div>
+        
         <div class="container-fluid">
-            <a class="navbar-brand  bg-primary text-white px-3 py-2 rounded" href="#">logo</a>
+          <!-- <a class="navbar-brand  bg-primary text-white px-3 py-2 rounded" href="#" img src="view/include/img/logo.png" alt="Logo ">logo</a>-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="<?php echo BASE_URL; ?>home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo BASE_URL; ?>users">Users</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo BASE_URL; ?>new-product">product</a>
-                    </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="<?php echo BASE_URL; ?>products">products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?php echo BASE_URL; ?>new-categoria">Categorias</a>
-                    </li>
-                      <li class="nav-item">
-                        <a class="nav-link " href="<?php echo BASE_URL; ?>category">Category</a>
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>new-product"> new-product</a>
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>products">products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>new-categoria">new-Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>category">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>cliente">Cliente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>new-cliente">new-Cliente</a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>proveedor">Proveedor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>new-proveedor">new-Proveedor</a>
+                  <!--  </li>
+                        <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>venta">Venta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>new-venta">new-Venta</a>
+                    </li>
+
+-->
+                    <!--<li class="nav-item">
                         <a class="nav-link" href="#">Clients</a>
                     </li>
+-->
                     <li class="nav-item">
                         <a class="nav-link" href="#">Shops</a>
                     </li>
@@ -70,9 +136,8 @@
                                 Dropdown
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><button type="button" onclick="cerrar_sesion();">cerrar_sesion</button></li>
                             </ul>
                         </li>
                     </ul>
@@ -80,3 +145,28 @@
             </div>
         </div>
     </nav>
+    <!-- Botón NUEVO global -->
+    <div class="d-flex justify-content-end me-4">
+        <button class="btn btn-warning" id="btnNuevo" onclick="redirigirNuevo()"> Nuevo</button>
+    </div>
+    <script>
+        function redirigirNuevo() {
+            // Obtener la URL actual
+            let url = window.location.href;
+
+            // Validar en qué sección estás
+            if (url.includes("user") || url.includes("usuarios")) {
+                window.location.href = base_url + "new-user";
+            } else if (url.includes("product") || url.includes("producto")) {
+                window.location.href = base_url + "new-product";
+            } else if (url.includes("category") || url.includes("categoria")) {
+                window.location.href = base_url + "new-categoria";
+            } else if (url.includes("cliente")) {
+                window.location.href = base_url + "new-cliente";
+            } else if (url.includes("proveedor")) {
+                window.location.href = base_url + "new-proveedor";
+            } else {
+                alert("Selecciona una sección (Usuarios, Productos, Categorías, Clientes o Proveedores)");
+            }
+        }
+    </script>

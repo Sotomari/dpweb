@@ -1,7 +1,7 @@
 <!-- INICIO DE CUERPO DE PAGINA-->
 <div class="container-fluid">
     <div class="card">
-        <h5 class="card-header text-center">EDITAR DATOS DEL USUARIO</h5>
+        <h5 class="card-header text-center bg-primary text-white">EDITAR DATOS DEL USUARIO</h5>
         <?php
         if (isset($_GET["views"])) {
             $ruta = explode("/", $_GET["views"]);
@@ -10,7 +10,7 @@
         ?>
         <!--<form id="frm_user" action="" method="post">-->
         <form id="frm_edit_user" action="" method="">
-            <input type="hidden" id="id_persona" name="id_persona" value="<?=$ruta[1]; ?>">
+            <input type="hidden" id="id_persona" name="id_persona" value="<?= $ruta[1]; ?>">
             <div class="card-body">
                 <div class="mb-3 row">
                     <label for="nro_identidad" class="col-sm-2 col-form-label">nro Documento:</label>
@@ -72,18 +72,27 @@
                     <label for="rol" class="col-sm-2 col-form-label">rol:</label>
                     <div class="col-sm-8">
                         <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" require>
-                           
                             <option value="Administrador">Administrador</option>
                             <option value="Gerente">Gerente</option>
-                            <option value="Trabajador">Trabajador</option>
+                            <option value="Trabajador">Proveedor</option>
+                            <option value="Trabajador">Cliente</option>
+
+
                         </select>
                     </div>
                 </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <a href="<?= BASE_URL ?>users" class="btn btn-warning">Cancelar</a>
+                    </div>
+                </div>
 
-                <div class="text-center">
+                <!-- <div class="text-center">
                     <button type="submit" class="btn btn-success">Actualizar</button>
                     <a href="<?= BASE_URL ?>users" class="btn btn-danger">Cancelar</a>
-                </div>
+                </div>-->
             </div>
         </form>
     </div>

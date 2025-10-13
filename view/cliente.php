@@ -1,6 +1,11 @@
+<!-- Contenedor donde se mostrará el formulario -->
+<div id="formularioCliente" style="display:none;">
+    <?php include_once "form-cliente.php"; ?>
+</div>
+
 <div class="container">
     <center>
-    <h1>Lista de Usuarios</h1>
+        <h1>Lista de Clientes</h1>
     </center>
     <table class="table table-bordered table-strip">
 
@@ -16,7 +21,7 @@
 
             </tr>
         </thead>
-        <tbody id="content_user">
+        <tbody id="content_clientes">
 
         </tbody>
     </table>

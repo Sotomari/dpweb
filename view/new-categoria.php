@@ -5,7 +5,7 @@
  <div class="container-fluid"> 
         <div class="card">
         <h5 class="card-header text-center bg-primary text-white">REGISTRAR CATEGORÍA</h5>
-        <form id="frm_categoria" action="" method="">
+        <form id="frm_category" action="" method="">
             <div class="card-body">
                 <div class="mb-3 row">
                     <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>

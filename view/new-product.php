@@ -1,9 +1,10 @@
 <!-- INICIO DE CUERPO DE PAGINA-->
+ 
 <div class="container-fluid">
     <div class="card">
-        <h5 class="card-header text-center">REGISTRO DE PRODUCTOS</h5>
+        <h5 class="card-header text-center bg-primary text-white">REGISTRO DE PRODUCTOS</h5>
 
-        <form id="frm_product" enctype="multipart/form-data">
+        <form id="frm_products" enctype="multipart/form-data">
             <div class="card-body">
 
                 <div class="mb-3 row">
@@ -46,9 +47,8 @@
                     <div class="col-sm-8">
                         <select class="form-control" name="id_categoria" id="id_categoria" style="border: 2px solid blue;" required>
                             <option value="" disabled selected>Seleccione</option>
-                            <option value="1">Categoría 1</option>
-                            <option value="2">Categoría 2</option>
-                            <option value="5">Categoría 3</option>
+
+
                         </select>
                     </div>
                 </div>
@@ -72,9 +72,7 @@
                     <div class="col-sm-8">
                         <select class="form-control" name="id_proveedor" id="id_proveedor" style="border: 2px solid blue;" required>
                             <option value="" disabled selected>Seleccione</option>
-                            <option value="1">Proveedor 1</option>
-                            <option value="2">Proveedor 2</option>
-                            <option value="3">Proveedor 3</option>
+                 
                         </select>
                     </div>
                 </div>
@@ -82,7 +80,8 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-success">Registrar</button>
                     <button type="reset" class="btn btn-info">Limpiar</button>
-                    <a href="<?= BASE_URL ?>category" class="btn btn-danger">Cancelar</a>
+                 <a href="<?= BASE_URL ?>products" class="btn btn-danger">Cancelar</a>
+
                 </div>
 
             </div>
@@ -92,3 +91,7 @@
 <!-- FIN DE CUERPO DE PAGINA-->
 
 <script src="<?php echo BASE_URL; ?>view/function/product.js"></script>
+<script>
+    cargar_categorias();
+    cargar_proveedores();
+</script>

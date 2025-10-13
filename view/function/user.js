@@ -61,25 +61,20 @@ async function registrarUsuario() {
         } else {
             alert(json.msg);
         }
-    } catch (e) {
-        console.log("Error al registrar Usuario:" + e);
+    } catch (error) {
+        console.log("Error al registrar Usuario:" + error);
     }
 
 }
 
 async function iniciar_sesion() {
-    let usuario = document.getElementById("username").value;
+    let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
-    if (usuario == "" || password == "") {
-
-        //alert("Error, campos vacios!")
-        Swal.fire({
-            icon: "error",
-            title: "Error, campos vacios!"
-
-        });
+    if (username == "" || password == "") {
+        alert("Error: campos vacios!");
         return;
     }
+    /* try catch: capturador de errores*/
     try {
         const datos = new FormData(frm_login);
         let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=iniciar_sesion', {
@@ -88,24 +83,20 @@ async function iniciar_sesion() {
             cache: 'no-cache',
             body: datos
         });
-
         let json = await respuesta.json();
-        //validamos  que json.status sea 0 True
         if (json.status) {
-            location.replace(base_url + 'new-user');
-
+            location.replace(base_url + 'home');
         } else {
             alert(json.msg);
         }
 
     } catch (error) {
         console.log(error);
-
     }
-
 }
 
 
+/* para ver usuarios registrados */
 async function view_users() {
     try {
         let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_usuarios', {
@@ -113,40 +104,73 @@ async function view_users() {
             mode: 'cors',
             cache: 'no-cache'
         });
-
-        let json = await respuesta.json();
-        if (json && json.length > 0) {
-            let html = '';
-            json.forEach((user, index) => {
-                html += `<tr>
-                    <td>${index + 1}</td>
-                    <td>${user.nro_identidad || ''}</td>
-                    <td>${user.razon_social || ''}</td>
-                    <td>${user.correo || ''}</td>
-                    <td>${user.rol || ''}</td>
-                    <td>${user.estado || ''}</td>
-                      <td>
-                      <a href="`+ base_url + `edit-user/` + user.id + `">Editar</a>
-                    
-<button onclick="btn_eliminar(` + user.id + `);" class="btn btn-eliminar btn-danger">Eliminar</button>
-
-
-                  </td>
-                  </tr>`;
+        json = await respuesta.json();
+        contenidot = document.getElementById('content_user');
+        if (json.status) {
+            let cont = 1;
+            json.data.forEach(usuario => {
+                if (usuario.estado == 1) {
+                    estado = "activo";
+                } else {
+                    estado = "inactivo";
+                }
+                let nueva_fila = document.createElement("tr");
+                nueva_fila.id = "fila" + usuario.id;
+                nueva_fila.className = "filas_tabla";
+                nueva_fila.innerHTML = `
+                            <td>${cont}</td>
+                            <td>${usuario.nro_identidad}</td>
+                            <td>${usuario.razon_social}</td>
+                            <td>${usuario.correo}</td>
+                            <td>${usuario.rol}</td>
+                            <td>${estado}</td>
+                            <td>
+                                <a href="`+ base_url + `edit-user/` + usuario.id + `">Editar</a>
+                                <button class="btn btn-danger" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
+                            </td>
+                `;
+                cont++;
+                contenidot.appendChild(nueva_fila);
             });
-            document.getElementById('content_users').innerHTML = html;
-        } else {
-            document.getElementById('content_users').innerHTML = '<tr><td colspan="6">No hay usuarios disponibles</td></tr>';
         }
     } catch (error) {
-        console.log("Error al obtener usuarios:", error);
-        document.getElementById('content_users').innerHTML = '<tr><td colspan="6">Error al cargar los usuarios</td></tr>';
+        console.log('error en mostrar usuario ' + e);
+    }
+}
+if (document.getElementById('content_user')) {
+    view_users();
+}
+
+//eliminar
+async function fn_eliminar(id) {
+    if (window.confirm("Confirmar eliminar?")) {
+        eliminar(id);
+    }
+}
+async function eliminar(id) {
+    let datos = new FormData();
+    datos.append('id_persona', id);
+    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=eliminar', {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        body: datos
+    });
+    json = await respuesta.json();
+    if (!json.status) {
+        alert("Oooooops, ocurrio un error al eliminar persona, intentelo mas tarde");
+        console.log(json.msg);
+        return;
+    }else{
+        alert(json.msg);
+        location.replace(base_url + 'users');
     }
 }
 
-if (document.getElementById('content_users')) {
-    view_users();
-}
+
+
+
+//editar user
 async function edit_user() {
     try {
         let id_persona = document.getElementById('id_persona').value;
@@ -175,6 +199,7 @@ async function edit_user() {
         document.getElementById('cod_postal').value = json.data.cod_postal;
         document.getElementById('direccion').value = json.data.direccion;
         document.getElementById('rol').value = json.data.rol;
+        document.getElementById('estado').value = json.data.estado;
 
 
     } catch (error) {
@@ -211,34 +236,181 @@ async function actualizarUsuario() {
 
 
 
+/*async function view_users() {
+    try {
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_usuarios', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
 
+        let json = await respuesta.json();
+        let content_users = document.getElementById('content_user');
+        content_users.innerHTML = ''; // limpiamos antes de insertar
 
-async function btn_eliminar(id) {
-    if (window.confirm("delemeter")) {
-        eliminar(id);
+        json.forEach((user, index) => {
+            let fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${user.nro_identidad}</td>
+                <td>${user.razon_social}</td>
+                <td>${user.correo}</td>
+                <td>${user.rol}</td>
+                <td>${user.estado}</td>
+                <td>
+                    <a href="`+ base_url + `edit-user/` + user.id + `" class="btn btn-success">Editar</a>
+                    <br>
+                    <button data-id="${user.id}" class="btn btn-eliminar btn-danger">Eliminar</button>
+                </td>
+                
+            `;
+            
+            content_users.appendChild(fila);
+        });
+
+        // Agrega el evento click a los botones de eliminar
+        document.querySelectorAll('.btn-eliminar').forEach(btn => {
+            btn.addEventListener('click', async function () {
+                if (confirm('¿Está seguro de eliminar este usuario?')) {
+                    const datos = new FormData();
+                    datos.append('id', this.getAttribute('data-id'));
+                    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=eliminar', {
+                        method: 'POST',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        body: datos
+                    });
+                    let json = await respuesta.json();
+                    alert(json.msg);
+                    if (json.status) {
+                        view_users(); // Recarga la lista
+                    }
+                }
+            });
+        });
+
+    } catch (error) {
+        console.log('Error al obtener usuarios, No hay nada: ' + error);
     }
+}
+if (document.getElementById('content_user')) {
+    view_users();
+} */
+
+/*para editar usuario */
 
 
 
+
+
+/*para cerrar sesion */
+async function cerrar_sesion() {
+    try {
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=cerrar_sesion', {
+            method: 'GET', // O POST si prefieres más seguridad
+            mode: 'cors',
+            cache: 'no-cache',
+        });
+        let json = await respuesta.json();
+        if (json.status) {
+            location.replace(base_url + 'login'); // Redirige al login u otra página
+        } else {
+            alert("No se pudo cerrar sesión: " + json.msg);
+        }
+    } catch (error) {
+        console.log("Error al cerrar sesión:", error);
+    }
 }
 
 
-async function eliminar(id) {
-    let datos = new FormData();
-    datos.append('id_persona', id);
-    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=eliminar', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        body: datos
-    });
-    json = await respuesta.json();
-    if (!json.status) {
-        alert("Oooops, ocurrio un error al actualizar, intentelo nuevamente");
-        console.log(json.msg);
-        return;
-    } else {
-        alert(json.msg);
-        location.replace(base_url + 'users');
+async function view_clientes() {
+    try {
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_clientes', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
+        json = await respuesta.json();
+        contenidot = document.getElementById('content_clientes');
+        if (json.status) {
+            let cont = 1;
+            json.data.forEach(usuario => {
+                if (usuario.estado == 1) {
+                    estado = "activo";
+                } else {
+                    estado = "inactivo";
+                }
+                let nueva_fila = document.createElement("tr");
+                nueva_fila.id = "fila" + usuario.id;
+                nueva_fila.className = "filas_tabla";
+                nueva_fila.innerHTML = `
+                            <td>${cont}</td>
+                            <td>${usuario.nro_identidad}</td>
+                            <td>${usuario.razon_social}</td>
+                            <td>${usuario.correo}</td>
+                            <td>${usuario.rol}</td>
+                            <td>${estado}</td>
+                            <td>
+                                <a href="`+ base_url + `edit-user/` + usuario.id + `">Editar</a>
+                                <button class="btn btn-danger" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
+                            </td>
+                `;
+                cont++;
+                contenidot.appendChild(nueva_fila);
+            });
+        }
+    } catch (error) {
+        console.log('error en mostrar usuario ' + e);
     }
+}
+if (document.getElementById('content_clientes')) {
+    view_clientes();
+}
+
+
+
+
+// ver proveedores
+async function view_proveedor() {
+    try {
+        let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_proveedores', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
+        json = await respuesta.json();
+        contenidot = document.getElementById('content_proveedor');
+        if (json.status) {
+            let cont = 1;
+            json.data.forEach(usuario => {
+                if (usuario.estado == 1) {
+                    estado = "activo";
+                } else {
+                    estado = "inactivo";
+                }
+                let nueva_fila = document.createElement("tr");
+                nueva_fila.id = "fila" + usuario.id;
+                nueva_fila.className = "filas_tabla";
+                nueva_fila.innerHTML = `
+                            <td>${cont}</td>
+                            <td>${usuario.nro_identidad}</td>
+                            <td>${usuario.razon_social}</td>
+                            <td>${usuario.correo}</td>
+                            <td>${usuario.rol}</td>
+                            <td>${estado}</td>
+                            <td>
+                                <a href="`+ base_url + `edit-user/` + usuario.id + `">Editar</a>
+                                <button class="btn btn-danger" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
+                            </td>
+                `;
+                cont++;
+                contenidot.appendChild(nueva_fila);
+            });
+        }
+    } catch (error) {
+        console.log('error en mostrar usuario ' + e);
+    }
+}
+if (document.getElementById('content_proveedor')) {
+    view_proveedor();
 }

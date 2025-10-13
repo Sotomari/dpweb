@@ -28,25 +28,36 @@ class CategoriaModel
     }
 
 
-    /*metodo para buscar una categoria atraves de su numero de nombre */
-    public function buscarCategoriaPorNroNombre($nombre)
-    {
-        $consulta = "SELECT id, nombre from categoria where nombre = '$nombre' limit 1;";
-        $sql = $this->conexion->query($consulta);
-        return $sql->fetch_object();
-    }
-
     /*metodo para listar */
     public function verCategorias()
     {
         $arr_categorias = array();
-        $consulta = "SELECT * from categoria";
+        $consulta = "SELECT * from categoria"; // where rol='Proveedor'
         $sql = $this->conexion->query($consulta);
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_categorias, $objeto);
         }
         return $arr_categorias;
     }
+
+
+    
+//ver persona
+    public function verProveedor()
+    {
+        $arr_proveedor = array();
+        // solo los usuarios que tengan rol "Proveedor"
+        $consulta = "SELECT id_persona, nombre FROM persona WHERE rol = 'Proveedor'";
+        $sql = $this->conexion->query($consulta);
+        while ($objeto = $sql->fetch_object()) {
+            array_push($arr_proveedor, $objeto);
+        }
+        return $arr_proveedor;
+    }
+
+
+
+
 
     /*metodo para ver  */
     public function ver($id)

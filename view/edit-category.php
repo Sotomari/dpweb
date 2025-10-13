@@ -37,4 +37,4 @@
     
     <script>
         edit_category();
-    </script>
+    </script> 

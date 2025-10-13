@@ -7,6 +7,9 @@ async function view_products() {
         });
         json = await respuesta.json();
         contenidot = document.getElementById('content_products');
+
+
+        contenidot.innerHTML = "";
         if (json.status) {
             let cont = 1;
             json.data.forEach(producto => {
@@ -34,6 +37,7 @@ async function view_products() {
         console.log('error en mostrar producto ' + e);
     }
 }
+
 if (document.getElementById('content_products')) {
     view_products();
 }
@@ -70,9 +74,9 @@ function validar_form(tipo) {
 
 }
 
-if (document.querySelector('#frm_product')) {
+if (document.querySelector('#frm_products')) {
     //Evita que se envíe el formulario
-    let frm_product = document.querySelector('#frm_product');
+    let frm_product = document.querySelector('#frm_products');
     frm_product.onsubmit = function (e) {
         e.preventDefault();
         validar_form("nuevo");
@@ -94,7 +98,7 @@ async function registrarProducto() {
         let json = await respuesta.json();
         if (json.status) {
             alert(json.msg);
-            document.getElementById('frm_product').reset();
+            document.getElementById('frm_products').reset();
         } else {
             alert(json.msg);
         }
@@ -224,8 +228,61 @@ async function eliminar(id) {
         location.replace(base_url + 'products');
     }
 }
+//cargar categoria
+async function cargar_categorias() {
+    let respuesta = await fetch(base_url + 'control/CategoriaController.php?tipo=ver_categorias', {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+
+    });
+    let json = await respuesta.json();
+    let contenido = '<option>Seleccione</option>';
+    json.data.forEach(categoria => {
+        contenido += '<option value="'+ categoria.id +'">' + categoria.nombre + '</option>';
+
+    });
+    //console.log(contenido);
+    document.getElementById("id_categoria").innerHTML=contenido;
+}
 
 
+//cargar proveedores
+async function cargar_proveedores() {
+    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_proveedores', {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
 
+    });
+    let json = await respuesta.json();
+    let contenido = '<option>Seleccione</option>';
+    json.data.forEach(proveedor => {
+        contenido += '<option value="'+ proveedor.id +'">' + proveedor.razon_social+ '</option>';
 
+    });
+    //console.log(contenido);
+    document.getElementById("id_proveedor").innerHTML=contenido;
+}
 
+/*
+
+async function cargar_proveedores() {
+    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_proveedores', {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+    });
+
+    let json = await respuesta.json();
+    let contenido = '<option value="">Seleccione proveedor</option>';
+
+    if (json.status) {
+        json.data.forEach(proveedor => {
+            contenido += `<option value="${proveedor.id}">${proveedor.razon_social}</option>`;
+        });
+    }
+
+    document.getElementById("id_proveedor").innerHTML = contenido;
+}
+*/
