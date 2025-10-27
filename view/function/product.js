@@ -1,3 +1,4 @@
+/* para ver productos registrados */
 async function view_products() {
     try {
         let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
@@ -24,6 +25,7 @@ async function view_products() {
                             <td>${producto.stock}</td>
                             <td>${producto.categoria}</td>
                             <td>${producto.fecha_vencimiento}</td>
+                            <td>${producto.proveedor}</td>
                             <td>
                                 <a href="`+ base_url + `edit-product/` + producto.id + `">Editar</a>
                                 <button class="btn btn-danger" onclick="fn_eliminar(` + producto.id + `);">Eliminar</button>
@@ -53,8 +55,11 @@ function validar_form(tipo) {
     let id_categoria = document.getElementById("id_categoria").value;
     let fecha_vencimiento = document.getElementById("fecha_vencimiento").value;
     let id_proveedor = document.getElementById("id_proveedor").value;
+    /*let imagen = document.getElementById("imagen").value;*/
 
-    if (codigo == "" || nombre == "" || detalle == "" || precio == "" || stock == "" || id_categoria == "" || fecha_vencimiento == "" || id_proveedor == "") {
+    //let id_proveedor = document.getElementById("id_proveedor").value;
+
+    if (codigo == "" || nombre == "" || detalle == "" || precio == "" || stock == "" || id_categoria == "" || fecha_vencimiento == "" || id_proveedor == "" /*|| imagen == ""*/ ) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -86,7 +91,7 @@ if (document.querySelector('#frm_products')) {
 async function registrarProducto() {
     try {
         // capturar campos de formulario(HTML)
-        const datos = new FormData(frm_product);
+        const datos = new FormData(frm_products);
 
         //enviar datos al controlador
         let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=registrar', {
@@ -108,7 +113,7 @@ async function registrarProducto() {
     }
 }
 
-
+/*
 
 // Agrega el evento click a los botones de eliminar
 document.querySelectorAll('.btn-eliminar').forEach(btn => {
@@ -139,7 +144,7 @@ document.querySelectorAll('.btn-eliminar').forEach(btn => {
 if (document.getElementById('content_product')) {
     view_products();
 }
-
+*/
 /* para editar producto */
 async function edit_product() {
     try {
@@ -204,28 +209,34 @@ async function actualizarProducto() {
 
 // para eliminar producto
 async function fn_eliminar(id) {
-    if (window.confirm("¿Confirmar eliminar?")) {
+    if (window.confirm("¿Está seguro de eliminar este producto?")) {
         eliminar(id);
     }
 }
 
 async function eliminar(id) {
-    let datos = new FormData();
-    datos.append('id', id);
-    let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=eliminar', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        body: datos
-    });
-    let json = await respuesta.json();
-    if (!json.status) {
-        alert("");
-        alert("Error: " + json.msg);
-        return;
-    } else {
-        alert(json.msg)
-        location.replace(base_url + 'products');
+    try {
+        let datos = new FormData();
+        datos.append('id', id); // ⚠️ CAMBIO IMPORTANTE: era 'id_producto', ahora es 'id'
+        
+        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=eliminar', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+        
+        let json = await respuesta.json();
+        
+        if (json.status) {
+            alert(json.msg);
+            view_products(); // Recargar la lista
+        } else {
+            alert("Error: " + json.msg);
+        }
+    } catch (error) {
+        console.log("Error al eliminar: " + error);
+        alert("Error al eliminar el producto");
     }
 }
 //cargar categoria

@@ -9,7 +9,7 @@
         }
         ?>
         <!--<form id="frm_user" action="" method="post">-->
-        <form id="frm_edit_user" action="" method="">
+        <form id="frm_edit_user" action="" method="POST">
             <input type="hidden" id="id_persona" name="id_persona" value="<?= $ruta[1]; ?>">
             <div class="card-body">
                 <div class="mb-3 row">
@@ -74,8 +74,8 @@
                         <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" require>
                             <option value="Administrador">Administrador</option>
                             <option value="Gerente">Gerente</option>
-                            <option value="Trabajador">Proveedor</option>
-                            <option value="Trabajador">Cliente</option>
+                            <option value="Proveedor">Proveedor</option>
+                            <option value="Cliente">Cliente</option>
 
 
                         </select>

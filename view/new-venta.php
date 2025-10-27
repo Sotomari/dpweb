@@ -1,44 +1,46 @@
 <div class="container mt-4">
-    <div class="card">
-        <div class="card-header bg-primary text-white">Registro de Venta</div>
-        <div class="card-body">
-            <form id="frm_venta" enctype="multipart/form-data">
+    <div class="card shadow-lg">
+        <h5 class="card-header text-center bg-primary text-white">REGISTRO DE VENTAS</h5>
+
+        <div class="card-body" action="" method="">
+            <form id="frm_venta" enctype="multipart/form-data" class="row g-3">
                 <input type="hidden" id="id_venta" name="id_venta">
 
-                <div class="mb-3 row">
-                    <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
-                    <div class="col-sm-8">
-                        <input type="date" class="form-control" id="fecha" name="fecha" required>
-                    </div>
+                <!-- FILA 1: Fecha y Total -->
+                <div class="col-md-6">
+                    <label for="fecha" class="form-label fw-bold">Fecha</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" required>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="total" class="col-sm-2 col-form-label">Total</label>
-                    <div class="col-sm-8">
-                        <input type="number" class="form-control" id="total" name="total" required>
-                    </div>
+                <div class="col-md-6">
+                    <label for="total" class="form-label fw-bold">Total</label>
+                    <input type="number" class="form-control" id="total" name="total" required placeholder="0.00">
                 </div>
 
-                <div class="mb-3">
-                    <label for="id_cliente" class="col-sm-2 col-form-label">Cliente</label>
-                    <div class="col-sm-8 row">
-                        <select id="id_cliente" name="id_cliente" class="form-control" required>
-                            <option value="">Seleccione Cliente</option>
-                            <!-- cargado con JS -->
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="id_vendedor" class="col-sm-2 col-form-label">Vendedor</label>
-                    <div class="col-sm-8 row">
-                        <select id="id_vendedor" name="id_vendedor" class="form-control" required>
-                            <option value="">Seleccione Vendedor</option>
-                            <!-- cargado con JS -->
-                        </select>
-                    </div>
+                <!-- FILA 2: Cliente y Vendedor -->
+                <div class="col-md-6">
+                    <label for="id_cliente" class="form-label fw-bold">Cliente</label>
+                    <select id="id_cliente" name="id_cliente" class="form-select" required>
+                        <option value="">Seleccione Cliente</option>
+                        <!-- cargado con JS -->
+                    </select>
                 </div>
 
-                <button type="submit" class="btn btn-success">Guardar</button>
+                <div class="col-md-6">
+                    <label for="id_vendedor" class="form-label fw-bold">Vendedor</label>
+                    <select id="id_vendedor" name="id_vendedor" class="form-select" required>
+                        <option value="">Seleccione Vendedor</option>
+                        <!-- cargado con JS -->
+                    </select>
+                </div>
+
+                <!-- BOTÓN -->
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="btn btn-success px-5">Guardar</button>
+                </div>
             </form>
         </div>
     </div>
+</div>
+<script src="<?php echo BASE_URL; ?>view/function/venta.js"></script>
+

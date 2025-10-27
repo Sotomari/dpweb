@@ -2,17 +2,19 @@
     <center>
         <h1>Lista de Productos </h1>
     </center>
-     
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Nro</th>
                 <th>Código</th>
                 <th>Nombre del Producto</th>
-                <th>Categoría</th>
                 <th>Precio</th>
                 <th>Stock</th>
+                <th>Categoría</th>
                 <th>fecha_vencimiento</th>
+                <th>Proveedor</th>
+               <!-- <th>imagen</th>-->
                 <th>Acciones</th>
 
 

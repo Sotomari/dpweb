@@ -23,11 +23,11 @@ if ($tipo == "ver_ventas") {
 if ($tipo == "registrar") {
     $fecha      = $_POST['fecha'];
     $total      = $_POST['total'];
-    $id_usuario = $_POST['id_usuario'];
+    $id_vendedor = $_POST['id_vendedor'];
     $id_cliente = $_POST['id_cliente'];
     $estado     = $_POST['estado'];
 
-    $id = $objVenta->registrar($fecha, $total, $id_usuario, $id_cliente, $estado);
+    $id = $objVenta->registrar($fecha, $total, $id_vendedor, $id_cliente, $estado);
     if ($id > 0) {
         $respuesta['status'] = true;
         $respuesta['msg'] = "Venta registrada correctamente";
@@ -53,14 +53,14 @@ if ($tipo == "ver") {
 }
 
 if ($tipo == "actualizar") {
-    $id         = $_POST['id_venta'];
+    $id         = $_POST['id'];
     $fecha      = $_POST['fecha'];
     $total      = $_POST['total'];
     $id_cliente = $_POST['id_cliente'];
-    $id_usuario = $_POST['id_usuario'];
+    $id_vendedor = $_POST['id_vendedor'];
     $estado     = $_POST['estado'];
 
-    $ok = $objVenta->actualizar($id, $fecha, $total, $id_usuario, $id_cliente, $estado);
+    $ok = $objVenta->actualizar($id, $fecha, $total, $id_vendedor, $id_cliente, $estado);
     if ($ok) {
         $respuesta['status'] = true;
         $respuesta['msg'] = "Venta actualizada correctamente";
@@ -72,7 +72,8 @@ if ($tipo == "actualizar") {
 }
 
 if ($tipo == "eliminar") {
-    $id = $_POST['id_venta'] ?? 0;
+    $id = $_POST['id_venta'] ?? 0; // 
+
     $ok = $objVenta->eliminar($id);
     if ($ok) {
         $respuesta['status'] = true;
@@ -85,3 +86,4 @@ if ($tipo == "eliminar") {
 }
 
 echo json_encode(["status" => false, "msg" => "Acción no válida"]);
+

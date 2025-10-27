@@ -54,35 +54,32 @@
                     <div class="col-sm-8">
                         <select class="form-control" name="id_categoria" id="id_categoria" style="border: 2px solid blue;" required>
                             <option value="" disabled selected>Seleccione</option>
-                            <option value="1">Categoría 1</option>
+                            <!--<option value="1">Categoría 1</option>
                             <option value="2">Categoría 2</option>
-                            <option value="5">Categoría 3</option>
+                            <option value="5">Categoría 3</option>-->
                         </select>
                     </div>
                 </div>
-
                 <div class="mb-3 row">
                     <label for="fecha_vencimiento" class="col-sm-2 col-form-label">Vencimiento:</label>
                     <div class="col-sm-8">
                         <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento" style="border: 2px solid blue;" required>
                     </div>
                 </div>
-
                 <div class="mb-3 row">
                     <label for="imagen" class="col-sm-2 col-form-label">Imagen:</label>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control" id="imagen" name="imagen" accept=".jpg, .jpeg, .png" style="border: 2px solid blue;" required>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept=".jpg, .jpeg, .png" style="border: 2px solid blue;" >
                     </div>
                 </div>
-
                 <div class="mb-3 row">
                     <label for="id_proveedor" class="col-sm-2 col-form-label">Proveedor:</label>
                     <div class="col-sm-8">
                         <select class="form-control" name="id_proveedor" id="id_proveedor" style="border: 2px solid blue;" required>
                             <option value="" disabled selected>Seleccione</option>
-                            <option value="1">Proveedor 1</option>
+                            <!--<option value="1">Proveedor 1</option>
                             <option value="2">Proveedor 2</option>
-                            <option value="3">Proveedor 3</option>
+                            <option value="3">Proveedor 3</option>-->
                         </select>
                     </div>
                 </div>
@@ -104,5 +101,11 @@
 <script src="<?php echo BASE_URL; ?>view/function/product.js"></script>
 
 <script>
-    edit_product();
+       // Cargar categorías y proveedores primero
+    cargar_categorias();
+    cargar_proveedores();
+    // Luego cargar los datos del producto
+    setTimeout(function() {
+        edit_product();
+    }, 500);
 </script>

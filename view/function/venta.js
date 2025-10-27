@@ -4,11 +4,11 @@
 function validar_form_venta(tipo) {
     let fecha = document.getElementById("fecha").value;
     let id_cliente = document.getElementById("id_cliente").value;
-    let id_usuario = document.getElementById("id_usuario").value;
+    let id_vendedor = document.getElementById("id_vendedor").value;
     let total = document.getElementById("total").value;
     let estado = document.getElementById("estado").value;
 
-    if (fecha == "" || id_cliente == "" || id_usuario == "" || total == "" || estado == "") {
+    if (fecha == "" || id_cliente == "" || id_vendedor == "" || total == "" || estado == "") {
         Swal.fire({
             icon: "error",
             title: "Error, complete todos los campos!"
@@ -29,10 +29,10 @@ function validar_form_venta(tipo) {
 
 if (document.querySelector('#frm_venta')) {
     let frm_venta = document.querySelector('#frm_venta');
-    frm_venta.onsubmit = function (e) {
-        e.preventDefault();
-        validar_form_venta("nuevo");
-    }
+ frm_venta.onsubmit = function (e) {
+    e.preventDefault();
+    validar_form_venta("nuevo");
+}
 }
 
 
@@ -68,26 +68,25 @@ async function view_ventas() {
         });
         let json = await respuesta.json();
 
-        if (json && json.length > 0) {
-            let html = "";
-            json.forEach((venta, index) => {
-                html += `<tr>
-                    <td>${index + 1}</td>
-                    <td>${venta.fecha || ''}</td>
-                    <td>${venta.id_cliente || ''}</td>
-                    <td>${venta.id_usuario || ''}</td>
-                    <td>${venta.total || ''}</td>
-                    <td>${venta.estado || ''}</td>
-                    <td>
-                        <a href="${base_url}edit-venta/${venta.id}" class="btn btn-sm btn-warning">Editar</a>
-                        <button onclick="btn_eliminar_venta(${venta.id});" class="btn btn-sm btn-danger">Eliminar</button>
-                    </td>
-                </tr>`;
-            });
-            document.getElementById("content_ventas").innerHTML = html;
-        } else {
-            document.getElementById("content_ventas").innerHTML = '<tr><td colspan="6">No hay ventas disponibles</td></tr>';
-        }
+   if (json && json.data.length > 0) {
+    let html = "";
+    json.data.forEach((venta, index) => {
+        html += `<tr>
+            <td>${venta.id}</td>
+            <td>${venta.fecha}</td>
+            <td>${venta.total}</td>
+            <td>${venta.id_cliente}</td>
+            <td>${venta.id_vendedor}</td>
+            <td>
+                <a href="${base_url}edit-venta/${venta.id}" class="btn btn-sm btn-warning">Editar</a>
+                <button onclick="btn_eliminar_venta(${venta.id});" class="btn btn-sm btn-danger">Eliminar</button>
+            </td>
+        </tr>`;
+    });
+    document.getElementById("content_ventas").innerHTML = html;
+} else {
+    document.getElementById("content_ventas").innerHTML = '<tr><td colspan="6">No hay ventas disponibles</td></tr>';
+}
     } catch (error) {
         console.log("Error al obtener ventas:", error);
     }
@@ -118,7 +117,7 @@ async function edit_venta() {
 
         document.getElementById("fecha").value = json.data.fecha;
         document.getElementById("id_cliente").value = json.data.id_cliente;
-        document.getElementById("id_usuario").value = json.data.id_usuario;
+        document.getElementById("id_vendedor").value = json.data.id_vendedor;
         document.getElementById("total").value = json.data.total;
         document.getElementById("estado").value = json.data.estado;
 
@@ -128,8 +127,8 @@ async function edit_venta() {
 }
 
 if (document.querySelector('#frm_edit_venta')) {
-    let frm_venta_edit = document.querySelector('#frm_edit_venta');
-    frm_venta_edit.onsubmit = function (e) {
+    let frm_venta = document.querySelector('#frm_edit_venta');
+    frm_venta.onsubmit = function (e) {
         e.preventDefault();
         validar_form_venta("actualizar");
     }
@@ -140,7 +139,8 @@ if (document.querySelector('#frm_edit_venta')) {
 
 async function actualizarVenta() {
     try {
-        const datos = new FormData(edit_venta);
+     const datos = new FormData(document.getElementById("frm_edit_venta"));
+
         let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=actualizar', {
             method: 'POST',
             body: datos

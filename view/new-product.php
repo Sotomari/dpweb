@@ -70,7 +70,7 @@
                 <div class="mb-3 row">
                     <label for="id_proveedor" class="col-sm-2 col-form-label">Proveedor:</label>
                     <div class="col-sm-8">
-                        <select class="form-control" name="id_proveedor" id="id_proveedor" style="border: 2px solid blue;" required>
+                        <select class="form-control" name="id_proveedor" id="id_proveedor" style="border: 2px solid blue;" required >
                             <option value="" disabled selected>Seleccione</option>
                  
                         </select>

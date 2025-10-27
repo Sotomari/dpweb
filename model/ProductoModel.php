@@ -58,13 +58,15 @@ class ProductoModel
         //convierte en objeto
         return $sql->fetch_object();
     }
+
     //metodo para actualizar
-    public function actualizar($id_producto, $codigo, $nombre, $detalle, $precio, $stock, $id_categoria, $fecha_vencimiento, $id_proveedor)
+    public function actualizar($id_producto, $codigo, $nombre, $detalle, $precio, $stock, $id_categoria, $fecha_vencimiento, $id_proveedor, $imagen)
     {
-        $consulta = "UPDATE producto SET codigo='$codigo', nombre='$nombre', detalle='$detalle', precio='$precio', stock='$stock', id_categoria ='$id_categoria', fecha_vencimiento='$fecha_vencimiento', id_proveedor ='$id_proveedor' WHERE  id='$id_producto'";
+        $consulta = "UPDATE producto SET codigo='$codigo', nombre='$nombre', detalle='$detalle', precio='$precio', stock='$stock', id_categoria ='$id_categoria', fecha_vencimiento='$fecha_vencimiento', id_proveedor ='$id_proveedor', imagen = '$imagen' WHERE  id='$id_producto'";
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
+    
         //metodo para eliminar
     public function eliminar($id_producto)
     {
@@ -73,3 +75,5 @@ class ProductoModel
         return $sql;
     }
 }
+
+

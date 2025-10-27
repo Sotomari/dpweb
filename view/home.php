@@ -123,7 +123,7 @@
                     <div class="cuadro">
                         <strong>venta</strong>
                         <a href="venta">
-                            <img src="view/home/detalle.png" alt="detalle">
+                            <img src="view/home/venta.png" alt="venta">
                         </a>
                     </div>
 

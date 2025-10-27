@@ -1,3 +1,4 @@
+
 // Validación y envío del formulario de usuario
 function validar_form(tipo) {
     // Obtener todos los campos
@@ -207,16 +208,21 @@ async function edit_user() {
     }
 
 }
+
+
 if (document.querySelector('#frm_edit_user')) {
-    //evita que se envie el formulario
-    let frm_user = document.querySelector('#frm_edit_user');
-    frm_user.onsubmit = function (e) {
+    let frm_edit_user = document.querySelector('#frm_edit_user');
+    frm_edit_user.onsubmit = function (e) {
         e.preventDefault();
         validar_form("actualizar");
     }
 }
 
+
+
+
 async function actualizarUsuario() {
+     let frm_edit_user = document.querySelector('#frm_edit_user');
     const datos = new FormData(frm_edit_user);
     let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=actualizar', {
         method: 'POST',
@@ -414,3 +420,4 @@ async function view_proveedor() {
 if (document.getElementById('content_proveedor')) {
     view_proveedor();
 }
+
