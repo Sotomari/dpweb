@@ -76,7 +76,7 @@
     .navbar .nav-link:hover {
         background-color: white;
         /* color de fondo al pasar el mouse */
-        color: #006afff1;
+        color: #064df3fe;
         /* cambia el color del texto */
     }
 </style>
@@ -139,6 +139,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo BASE_URL; ?>new-venta">new-Venta</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>vista-cliente">vista-cliente</a>
                     </li>
 
 

@@ -188,7 +188,7 @@ async function eliminar(id) {
     });
     json = await respuesta.json();
     if (!json.status) {
-        alert("Oooooops, ocurrio un error al eliminar categhoria, intentelo mas tarde");
+        alert("Oooooops, ocurrio un error al eliminar categoria, intentelo mas tarde");
         console.log(json.msg);
         return;
     } else {
