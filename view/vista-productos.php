@@ -43,6 +43,21 @@
       flex: 0 0 auto;
       position: relative;
       font-size: 14px;
+
+      /* Sombra suave en los bordes */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+
+      /* Transición suave para hover */
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    /* Efecto al pasar el mouse */
+    .card-product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+      border-color: #007bff;
+      /* Color de borde al pasar */
     }
 
     .card-product img {
