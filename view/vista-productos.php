@@ -1,99 +1,115 @@
 <div class="container">
-  <div class="arriba">
-    <h3 class="mt-3" style="color: white;">VISTA DE PRODUCTOS</h3>
+  <div class="car">
+    <h3 class="text-center text-black fw-bold">VISTA DE PRODUCTOS</h3>
     <h3 class="new-product">
       <!--<a class="nav-link" href="<?php echo BASE_URL; ?>new-product">Nuevo Producto</a>-->
     </h3>
   </div>
   <style>
-    .arriba {
-      gap: 5rem;
-      display: flex;
-    }
+ 
+#product-image {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
 
-    .new-product {
-      margin-top: 15px;
-    }
+/* Tarjeta principal */
+.card-product {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
 
-    .product-view {
-      margin-top: 15px;
-    }
+.card-product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
 
-    .nav-link {
-      color: white;
-    }
-  </style>
-  <style>
-    #product-image {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      /*display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 15px;*/
-    }
+/* Imagen */
+.card-product img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  padding: 8px;
+  margin-bottom: 10px;
+}
 
-    .card-product {
-      background: white;
-      border-radius: 10px;
-      width: 180px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      flex: 0 0 auto;
-      position: relative;
-      font-size: 14px;
+/* Nombre */
+.card-product .nombre {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
 
-      /* Sombra suave en los bordes */
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+/* Descripción */
+.card-product .detalle {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 4px 0 8px;
+  height: 2.6em;
+  overflow: hidden;
+}
 
-      /* Transición suave para hover */
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-    }
+/* Precio */
+.card-product .precio {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #007bff; /* azul suave */
+  margin-bottom: 10px;
+}
 
-    /* Efecto al pasar el mouse */
-    .card-product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-      border-color: #007bff;
-      /* Color de borde al pasar */
-    }
+/* Botones dentro del mismo cuadro */
+.botones {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
 
-    .card-product img {
-      width: 100%;
-      height: 160px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 8px;
-    }
+/* Botón Ver Detalle */
+.btn-detalle {
+  flex: 1;
+  background-color: #17a2b8; /* celeste */
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-    .card-product .nombre {
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      margin-bottom: 2px;
-      color: #222;
-    }
+.btn-detalle:hover {
+  background-color: #138496;
+  transform: scale(1.05);
+}
 
-    .card-product .detalle {
-      font-weight: 400;
-      font-size: 0.85rem;
-      line-height: 1.2em;
-      height: 2.6em;
-      overflow: hidden;
-      margin-bottom: 8px;
-      color: #444;
-    }
+/* Botón Agregar */
+.btn-agregar {
+  flex: 1;
+  background-color: #28a745; /* verde */
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-    .card-product .precio {
-      font-weight: 700;
-      font-size: 1rem;
-      color: #222;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
+.btn-agregar:hover {
+  background-color: #1e7e34;
+  transform: scale(1.05);
+}
+
+
   </style>
 
   <div class="responsive">

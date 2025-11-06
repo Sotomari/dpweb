@@ -332,6 +332,11 @@ async function view_imagen() {
           <p>Precio:</p>
           <span>S/. ${producto.precio}</span>
         </div>
+         <div class="botones">
+          <button class="btn-detalle">Ver Detalle</button>
+          <button class="btn-agregar">Agregar al Carrito</button>
+        </div>
+
       `;
 
       product_imagens.appendChild(card);
@@ -346,3 +351,20 @@ async function view_imagen() {
 if (document.getElementById('product-image')) {
   view_imagen();
 }
+
+
+
+
+
+
+// para ver detalles
+// Cuando el usuario hace clic en Ver Detalle
+document.getElementById("btnVerDetalle").addEventListener("click", function() {
+  alert("Mostrando detalles del producto seleccionado...");
+  // Aquí puedes abrir un modal o cargar detalles dinámicamente
+});
+
+// Cuando el usuario hace clic en Agregar Producto
+document.getElementById("btnAgregar").addEventListener("click", function() {
+  window.location.href = "agregar-producto.php"; // Redirige a la vista de agregar producto
+});
