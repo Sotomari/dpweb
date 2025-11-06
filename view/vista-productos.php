@@ -2,7 +2,7 @@
   <div class="arriba">
     <h3 class="mt-3" style="color: white;">VISTA DE PRODUCTOS</h3>
     <h3 class="new-product">
-      <a class="nav-link" href="<?php echo BASE_URL; ?>new-product">Nuevo Producto</a>
+      <!--<a class="nav-link" href="<?php echo BASE_URL; ?>new-product">Nuevo Producto</a>-->
     </h3>
   </div>
   <style>
