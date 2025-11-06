@@ -5,6 +5,7 @@ async function view_products() {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache'
+
         });
         json = await respuesta.json();
         contenidot = document.getElementById('content_products');
@@ -297,3 +298,51 @@ async function cargar_proveedores() {
     document.getElementById("id_proveedor").innerHTML = contenido;
 }
 */
+
+//para mostrar imagen de productos
+async function view_imagen() {
+  try {
+    let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache'
+    });
+
+    let json = await respuesta.json();
+
+    // Verifica que haya datos
+    if (!json.status || !Array.isArray(json.data)) {
+      console.error('No se encontraron productos o formato incorrecto:', json);
+      return;
+    }
+
+    let product_imagens = document.getElementById('product-image');
+    product_imagens.innerHTML = ''; // Limpiamos antes de insertar
+
+    json.data.forEach((producto, index) => {
+      let card = document.createElement('div');
+      card.classList.add('card-product');
+
+      card.innerHTML = `
+        <div class="numero">${index + 1}</div>
+        <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-producto">
+        <div class="nombre">${producto.nombre}</div>
+        <div class="detalle">${producto.detalle}</div>
+        <div class="precio">
+          <p>Precio:</p>
+          <span>S/. ${producto.precio}</span>
+        </div>
+      `;
+
+      product_imagens.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error('Error al obtener productos:', error);
+  }
+}
+
+// Cargar productos al iniciar
+if (document.getElementById('product-image')) {
+  view_imagen();
+}

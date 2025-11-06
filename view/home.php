@@ -133,6 +133,13 @@
                             <img src="view/home/proveedor.png" alt="proveedor">
                         </a>
                     </div>
+                        <div class="cuadro">
+                        <strong>vista-productos</strong>
+                        <a href="vista-productos">
+                            <img src="view/home/vista-productos.png" alt="vista-productos">
+                        </a>
+                    </div>
+
                 </section>
             </div>
         </div>

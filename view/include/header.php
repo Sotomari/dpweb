@@ -141,7 +141,7 @@
                         <a class="nav-link " href="<?php echo BASE_URL; ?>new-venta">new-Venta</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link " href="<?php echo BASE_URL; ?>vista-cliente">vista-cliente</a>
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>vista-productos">vista-productos</a>
                     </li>
 
 
