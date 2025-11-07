@@ -64,7 +64,7 @@
 
     /*  Estilo general de los enlaces */
     .navbar .nav-link {
-        color: black;
+        color: white;
         /* color de texto normal */
         padding: 6px 15px;
         /* reduce tamaño del botón */
