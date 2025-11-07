@@ -3,8 +3,7 @@
     <h1>Lista de Usuarios</h1>
     </center>
     <table class="table table-bordered table-strip">
-
-        <thead>
+        <thead  class="table-dark">
             <tr>
                 <th>Nro</th>
                 <th>DNI</th>
@@ -21,6 +20,7 @@
         </tbody>
     </table>
 </div>
-
 <script src="<?= BASE_URL ?>view/function/user.js"></script> <!--para llamar a funcion-->
 <!--<script>view_user();</script>-->
+
+

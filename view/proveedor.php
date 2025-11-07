@@ -7,9 +7,9 @@
     <center>
         <h1>Lista de Proveedores</h1>
     </center>
-    <table class="table table-bordered table-strip">
+    <table class="table table-bordered border-primary table-strip">
 
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Nro</th>
                 <th>DNI</th>

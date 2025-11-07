@@ -4,7 +4,7 @@
     </center>
 
     <table class="table table-bordered table-striped">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Nro</th>
                 <th>Código</th>
