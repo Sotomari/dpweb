@@ -46,7 +46,7 @@
   text-transform: uppercase;
   color: #222;
   font-size: 1rem;
-  margin-bottom: 4px;
+  margin-bottom: 4px; 
 }
 
 /* Descripción */

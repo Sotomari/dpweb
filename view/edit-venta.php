@@ -33,7 +33,7 @@
                     <option value="">Seleccione Vendedor</option>
                     <!-- cargado con JS -->
                 </select>
-            </div>
+            </div> 
             <div class="mb-3 row">
                 <label for="estado" class="col-sm-2 col-form-label">Estado</label>
                 <select id="estado" name="estado" class="form-control" style="border: 2px solid blue;" required>
