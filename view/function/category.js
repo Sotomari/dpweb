@@ -76,9 +76,9 @@ async function view_category() {
             <td>${index + 1}</td>
             <td>${category.nombre}</td>
             <td>${category.detalle}</td>
-            <td>
-                <a href="`+ base_url + `edit-category/` + category.id + `">Editar</a>
-                <button class="btn btn-danger" onclick="fn_eliminar(` + category.id + `);">Eliminar</button>
+            <td class="text-center">
+                <a href="`+ base_url + `edit-category/` + category.id + `" class="btn btn-primary btn-sm">Editar</a>
+                <button class="btn btn-danger btn-sm" onclick="fn_eliminar(` + category.id + `);">Eliminar</button>
             </td>
         `;
                 content_categorys.appendChild(fila);

@@ -6,12 +6,12 @@
 
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Fecha</th>
-        <th>Total</th>
-        <th>Cliente</th>
-        <th>Vendedor</th>
-        <th>Acciones</th>
+        <th class="text-center">ID</th>
+        <th class="text-center">Fecha</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Cliente</th>
+        <th class="text-center">Vendedor</th>
+        <th class="text-center">Acciones</th>
       </tr>
     </thead>
     <tbody id="content_ventas">

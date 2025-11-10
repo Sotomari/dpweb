@@ -5,13 +5,13 @@
     <table class="table table-bordered table-strip">
         <thead  class="table-dark">
             <tr>
-                <th>Nro</th>
+                <th class="text-center">Nro</th>
                 <th>DNI</th>
-                <th>Nombres y Apellidos</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th class="text-center">Nombres y Apellidos</th>
+                <th class="text-center">Correo</th>
+                <th class="text-center">Rol</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Acciones</th>
 
             </tr>
         </thead>

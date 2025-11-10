@@ -6,10 +6,10 @@
      
         <thead class="table-dark">
             <tr>
-                <th>Nro</th>
-                <th>Nombre</th>
-                <th>Detalle</th>
-                <th>Acciones</th>
+                <th class="text-center">Nro</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Detalle</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody id="content_category">

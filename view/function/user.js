@@ -125,9 +125,9 @@ async function view_users() {
                             <td>${usuario.correo}</td>
                             <td>${usuario.rol}</td>
                             <td>${estado}</td>
-                            <td>
-                                <a href="`+ base_url + `edit-user/` + usuario.id + `">Editar</a>
-                                <button class="btn btn-danger" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
+                            <td class="text-center">
+                                <a href="`+ base_url + `edit-user/` + usuario.id + `" class="btn btn-primary btn-sm">Editar</a>
+                                <button class="btn btn-danger btn-sm" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
                             </td>
                 `;
                 cont++;
@@ -356,9 +356,9 @@ async function view_clientes() {
                             <td>${usuario.correo}</td>
                             <td>${usuario.rol}</td>
                             <td>${estado}</td>
-                            <td>
-                                <a href="`+ base_url + `edit-user/` + usuario.id + `">Editar</a>
-                                <button class="btn btn-danger" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
+                            <td class="text-center">
+                                <a href="`+ base_url + `edit-user/` + usuario.id + `" class="btn btn-primary btn-sm">Editar</a>
+                                <button class="btn btn-danger btn-sm" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
                             </td>
                 `;
                 cont++;
@@ -404,9 +404,9 @@ async function view_proveedor() {
                             <td>${usuario.correo}</td>
                             <td>${usuario.rol}</td>
                             <td>${estado}</td>
-                            <td>
-                                <a href="`+ base_url + `edit-user/` + usuario.id + `">Editar</a>
-                                <button class="btn btn-danger" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
+                            <td class="text-center">
+                                <a href="`+ base_url + `edit-user/` + usuario.id + `" class="btn btn-primary btn-sm">Editar</a>
+                                <button class="btn btn-danger btn-sm" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
                             </td>
                 `;
                 cont++;

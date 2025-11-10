@@ -27,9 +27,9 @@ async function view_products() {
                             <td>${producto.categoria}</td>
                             <td>${producto.fecha_vencimiento}</td>
                             <td>${producto.proveedor}</td>
-                            <td>
-                                <a href="`+ base_url + `edit-product/` + producto.id + `">Editar</a>
-                                <button class="btn btn-danger" onclick="fn_eliminar(` + producto.id + `);">Eliminar</button>
+                            <td class="text-center">
+                                <a href="`+ base_url + `edit-product/` + producto.id + `" class="btn btn-primary btn-sm">Editar</a>
+                                <button class="btn btn-danger btn-sm" onclick="fn_eliminar(` + producto.id + `);">Eliminar</button>
                             </td>
                 `;
                 cont++;

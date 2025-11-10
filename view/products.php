@@ -6,14 +6,14 @@
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
-                <th>Nro</th>
-                <th>Código</th>
-                <th>Nombre del Producto</th>
-                <th>Precio</th>
-                <th>Stock</th>
-                <th>Categoría</th>
-                <th>fecha_vencimiento</th>
-                <th>Proveedor</th>
+                <th class="text-center">Nro</th>
+                <th class="text-center">Código</th>
+                <th class="text-center">Nombre del Producto</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Stock</th>
+                <th class="text-center">Categoría</th>
+                <th class="text-center">fecha_vencimiento</th>
+                <th class="text-center">Proveedor</th>
                <!-- <th>imagen</th>-->
                 <th>Acciones</th>
 
