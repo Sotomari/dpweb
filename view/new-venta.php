@@ -34,9 +34,12 @@
                     </select>
                 </div>
 
-                <!-- BOTÓN -->
-                <div class="col-12 text-center mt-3">
-                    <button type="submit" class="btn btn-success px-5">Guardar</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                    <button type="reset" class="btn btn-info">Limpiar</button>
+                    <!--<button type="button" class="btn btn-danger" onclick="location.href='<?= BASE_URL ?>clientes'">Cancelar</button>-->
+
+                   <a href="<?= BASE_URL ?>ventas" class="btn btn-danger">Cancelar</a>
                 </div>
             </form>
         </div>

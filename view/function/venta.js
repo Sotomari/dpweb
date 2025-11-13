@@ -178,3 +178,8 @@ async function btn_eliminar_venta(id) {
         }
     }
 }
+
+
+
+
+

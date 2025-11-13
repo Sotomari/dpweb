@@ -86,4 +86,3 @@ if ($tipo == "eliminar") {
 }
 
 echo json_encode(["status" => false, "msg" => "Acción no válida"]);
-

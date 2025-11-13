@@ -121,8 +121,8 @@
                     </div>
 
                     <div class="cuadro">
-                        <strong>venta</strong>
-                        <a href="venta">
+                        <strong>ventas</strong>
+                        <a href="ventas">
                             <img src="view/home/venta.png" alt="venta">
                         </a>
                     </div>

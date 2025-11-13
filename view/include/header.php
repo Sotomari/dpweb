@@ -137,7 +137,7 @@
                         <a class="nav-link " href="<?php echo BASE_URL; ?>new-proveedor">new-Proveedor</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="<?php echo BASE_URL; ?>venta">Venta</a>
+                        <a class="nav-link " href="<?php echo BASE_URL; ?>ventas">Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo BASE_URL; ?>new-venta">new-Venta</a>

@@ -13,6 +13,7 @@
                 <th class="text-center">Stock</th>
                 <th class="text-center">Categoría</th>
                 <th class="text-center">fecha_vencimiento</th>
+                <th class="text-center">Código Barra</th>
                 <th class="text-center">Proveedor</th>
                <!-- <th>imagen</th>-->
                 <th>Acciones</th>
@@ -28,3 +29,4 @@
 
 <!-- Llamamos al archivo JS para manejar los productos -->
 <script src="<?= BASE_URL ?>view/function/product.js"></script>
+<script src="<?= BASE_URL ?>view/function/JsBarcode.all.min.js"></script>

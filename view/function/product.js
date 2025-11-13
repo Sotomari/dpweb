@@ -26,6 +26,7 @@ async function view_products() {
                             <td>${producto.stock}</td>
                             <td>${producto.categoria}</td>
                             <td>${producto.fecha_vencimiento}</td>
+                            <td><svg id="barcode${producto.id}"></svg></td>
                             <td>${producto.proveedor}</td>
                             <td class="text-center">
                                 <a href="`+ base_url + `edit-product/` + producto.id + `" class="btn btn-primary btn-sm">Editar</a>
@@ -34,6 +35,18 @@ async function view_products() {
                 `;
                 cont++;
                 contenidot.appendChild(nueva_fila);
+                //JsBarcode("#barcode"+producto.id, "Hi world!");
+                JsBarcode("#barcode" + producto.id, ""+producto.codigo, {
+                   // format: "CODE128",
+                    //lineColor: "#0066cc",
+                    width: 2,              // Ancho de cada barra (default: 2)
+                    height: 30,            // Altura del código de barras (default: 100)
+                    fontSize: 10,          // Tamaño del texto (default: 20)
+                    margin: 5,             // Margen alrededor (default: 10)
+                    displayValue: true     // Mostrar el código debajo del barcode
+                });
+
+
             });
         }
     } catch (e) {
@@ -60,7 +73,7 @@ function validar_form(tipo) {
 
     //let id_proveedor = document.getElementById("id_proveedor").value;
 
-    if (codigo == "" || nombre == "" || detalle == "" || precio == "" || stock == "" || id_categoria == "" || fecha_vencimiento == "" || id_proveedor == "" /*|| imagen == ""*/ ) {
+    if (codigo == "" || nombre == "" || detalle == "" || precio == "" || stock == "" || id_categoria == "" || fecha_vencimiento == "" || id_proveedor == "" /*|| imagen == ""*/) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -219,16 +232,16 @@ async function eliminar(id) {
     try {
         let datos = new FormData();
         datos.append('id', id); // ⚠️ CAMBIO IMPORTANTE: era 'id_producto', ahora es 'id'
-        
+
         let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=eliminar', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
             body: datos
         });
-        
+
         let json = await respuesta.json();
-        
+
         if (json.status) {
             alert(json.msg);
             view_products(); // Recargar la lista
@@ -251,11 +264,11 @@ async function cargar_categorias() {
     let json = await respuesta.json();
     let contenido = '<option>Seleccione</option>';
     json.data.forEach(categoria => {
-        contenido += '<option value="'+ categoria.id +'">' + categoria.nombre + '</option>';
+        contenido += '<option value="' + categoria.id + '">' + categoria.nombre + '</option>';
 
     });
     //console.log(contenido);
-    document.getElementById("id_categoria").innerHTML=contenido;
+    document.getElementById("id_categoria").innerHTML = contenido;
 }
 
 
@@ -270,11 +283,11 @@ async function cargar_proveedores() {
     let json = await respuesta.json();
     let contenido = '<option>Seleccione</option>';
     json.data.forEach(proveedor => {
-        contenido += '<option value="'+ proveedor.id +'">' + proveedor.razon_social+ '</option>';
+        contenido += '<option value="' + proveedor.id + '">' + proveedor.razon_social + '</option>';
 
     });
     //console.log(contenido);
-    document.getElementById("id_proveedor").innerHTML=contenido;
+    document.getElementById("id_proveedor").innerHTML = contenido;
 }
 
 /*
@@ -301,29 +314,29 @@ async function cargar_proveedores() {
 
 //para mostrar imagen de productos
 async function view_imagen() {
-  try {
-    let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache'
-    });
+    try {
+        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
 
-    let json = await respuesta.json();
+        let json = await respuesta.json();
 
-    // Verifica que haya datos
-    if (!json.status || !Array.isArray(json.data)) {
-      console.error('No se encontraron productos o formato incorrecto:', json);
-      return;
-    }
+        // Verifica que haya datos
+        if (!json.status || !Array.isArray(json.data)) {
+            console.error('No se encontraron productos o formato incorrecto:', json);
+            return;
+        }
 
-    let product_imagens = document.getElementById('product-image');
-    product_imagens.innerHTML = ''; // Limpiamos antes de insertar
+        let product_imagens = document.getElementById('product-image');
+        product_imagens.innerHTML = ''; // Limpiamos antes de insertar
 
-    json.data.forEach((producto, index) => {
-      let card = document.createElement('div');
-      card.classList.add('card-product');
+        json.data.forEach((producto, index) => {
+            let card = document.createElement('div');
+            card.classList.add('card-product');
 
-      card.innerHTML = `
+            card.innerHTML = `
         <div class="numero">${index + 1}</div>
         <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-producto">
         <div class="nombre">${producto.nombre}</div>
@@ -339,24 +352,24 @@ async function view_imagen() {
 
       `;
 
-      product_imagens.appendChild(card);
-    });
+            product_imagens.appendChild(card);
+        });
 
-  } catch (error) {
-    console.error('Error al obtener productos:', error);
-  }
+    } catch (error) {
+        console.error('Error al obtener productos:', error);
+    }
 }
 
 // Cargar productos al iniciar
 if (document.getElementById('product-image')) {
-  view_imagen();
+    view_imagen();
 }
 
 
 
 
 
-
+/*
 // para ver detalles
 // Cuando el usuario hace clic en Ver Detalle
 document.getElementById("btnVerDetalle").addEventListener("click", function() {
@@ -368,3 +381,95 @@ document.getElementById("btnVerDetalle").addEventListener("click", function() {
 document.getElementById("btnAgregar").addEventListener("click", function() {
   window.location.href = "agregar-producto.php"; // Redirige a la vista de agregar producto
 });
+*/
+
+
+let carrito = [];
+
+//  Función para agregar producto
+function agregarCarrito(nombre, precio) {
+    carrito.push({ nombre, precio });
+    mostrarCarrito();
+}
+
+//  Mostrar productos en el carrito
+function mostrarCarrito() {
+    let contenedor = document.getElementById('carrito-lista');
+    contenedor.innerHTML = '';
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = '<p class="text-muted text-center">Tu carrito está vacío</p>';
+        actualizarTotales();
+        return;
+    }
+
+    carrito.forEach((item, index) => {
+        let div = document.createElement('div');
+        div.classList.add('item');
+        div.innerHTML = `
+      <span>${item.nombre}</span>
+      <span>S/. ${item.precio.toFixed(2)}</span>
+      <button class="btn btn-sm btn-danger" onclick="eliminarItem(${index})">X</button>
+    `;
+        contenedor.appendChild(div);
+    });
+
+    actualizarTotales();
+}
+
+// Eliminar producto del carrito
+function eliminarItem(index) {
+    carrito.splice(index, 1);
+    mostrarCarrito();
+}
+
+//  Calcular totales
+function actualizarTotales() {
+    let subtotal = carrito.reduce((acc, p) => acc + p.precio, 0);
+    let igv = subtotal * 0.18;
+    let total = subtotal + igv;
+
+    document.getElementById('subtotal').textContent = `S/ ${subtotal.toFixed(2)}`;
+    document.getElementById('igv').textContent = `S/ ${igv.toFixed(2)}`;
+    document.getElementById('total').textContent = `S/ ${total.toFixed(2)}`;
+}
+
+//  Integración con tus productos cargados
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('btn-agregar')) {
+        let card = e.target.closest('.card-product');
+        let nombre = card.querySelector('.nombre').textContent;
+        let precio = parseFloat(card.querySelector('.precio span').textContent.replace('S/.', '').trim());
+        agregarCarrito(nombre, precio);
+    }
+});
+
+
+
+
+
+
+/*
+//venta ver en consola
+let productos_venta = {};
+let id = 2;
+let id2 =4;
+
+let producto = {};
+producto.nombre = "Producto A";
+producto.precio = 100;
+producto.cantidad = 2;
+//productos_venta.push(producto);
+
+let producto2= {};
+producto2.nombre = "Producto B";
+producto2.precio = 100;
+producto2.cantidad = 3;
+//productos_venta.push(producto);
+productos_venta[id]=producto;
+productos_venta[id2]=producto2;
+console.log(productos_venta);
+
+productos_venta.splice(id,1);
+console.log(productos_venta);
+*/

@@ -19,4 +19,9 @@
     </tbody>
   </table>
 </div>
-  <script src="<?= BASE_URL ?>view/function/venta.js"></script>
+
+
+
+<script src="<?= BASE_URL ?>view/function/venta.js"></script>
+<script src="<?= BASE_URL ?>view/function/product.js"></script>
+<script src="<?= BASE_URL ?>view/function/user.js"></script>
