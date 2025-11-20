@@ -6,7 +6,7 @@
         <thead  class="table-dark">
             <tr>
                 <th class="text-center">Nro</th>
-                <th>DNI</th>
+                <th class="text-center">DNI</th>
                 <th class="text-center">Nombres y Apellidos</th>
                 <th class="text-center">Correo</th>
                 <th class="text-center">Rol</th>

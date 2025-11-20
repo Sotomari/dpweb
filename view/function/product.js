@@ -36,8 +36,8 @@ async function view_products() {
                 cont++;
                 contenidot.appendChild(nueva_fila);
                 //JsBarcode("#barcode"+producto.id, "Hi world!");
-                JsBarcode("#barcode" + producto.id, ""+producto.codigo, {
-                   // format: "CODE128",
+                JsBarcode("#barcode" + producto.id, "" + producto.codigo, {
+                    // format: "CODE128",
                     //lineColor: "#0066cc",
                     width: 2,              // Ancho de cada barra (default: 2)
                     height: 30,            // Altura del código de barras (default: 100)
@@ -231,7 +231,7 @@ async function fn_eliminar(id) {
 async function eliminar(id) {
     try {
         let datos = new FormData();
-        datos.append('id', id); // ⚠️ CAMBIO IMPORTANTE: era 'id_producto', ahora es 'id'
+        datos.append('id', id); //  CAMBIO IMPORTANTE: era 'id_producto', ahora es 'id'
 
         let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=eliminar', {
             method: 'POST',
@@ -315,40 +315,48 @@ async function cargar_proveedores() {
 //para mostrar imagen de productos
 async function view_imagen() {
     try {
-        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver_productos', {
+      let dato = document.getElementById('busqueda_venta').value;
+        const datos = new FormData();
+        datos.append('dato', dato);
+        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=buscar_producto_venta', {
             method: 'POST',
             mode: 'cors',
-            cache: 'no-cache'
+            cache: 'no-cache',
+            body: datos
+
         });
 
-        let json = await respuesta.json();
 
-        // Verifica que haya datos
+
+        /* Verifica que haya datos
         if (!json.status || !Array.isArray(json.data)) {
             console.error('No se encontraron productos o formato incorrecto:', json);
             return;
-        }
+        }*/
 
+        let json = await respuesta.json();
         let product_imagens = document.getElementById('product-image');
         product_imagens.innerHTML = ''; // Limpiamos antes de insertar
 
         json.data.forEach((producto, index) => {
             let card = document.createElement('div');
             card.classList.add('card-product');
-
             card.innerHTML = `
-        <div class="numero">${index + 1}</div>
-        <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-producto">
-        <div class="nombre">${producto.nombre}</div>
-        <div class="detalle">${producto.detalle}</div>
-        <div class="precio">
-          <p>Precio:</p>
-          <span>S/. ${producto.precio}</span>
-        </div>
-         <div class="botones">
-          <button class="btn-detalle">Ver Detalle</button>
-          <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
+                <div>${index + 1}</div>
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+                <div class="nombre">${producto.nombre}</div>
+                <div class="detalle">${producto.detalle}</div>
+                <div class="precio">
+                <p>Precio:</p>
+                <span>S/. ${producto.precio}</span>
+                </div>
+                <div class="stock">
+                <strong>Stock:</strong> <span>${producto.stock}</span>
+                </div>
+                <div class="botones">
+                <button class="btn-detalle">Ver Detalle</button>
+                <button class="btn-agregar">Agregar al Carrito</button>
+                </div>
 
       `;
 
@@ -367,82 +375,6 @@ if (document.getElementById('product-image')) {
 
 
 
-
-
-/*
-// para ver detalles
-// Cuando el usuario hace clic en Ver Detalle
-document.getElementById("btnVerDetalle").addEventListener("click", function() {
-  alert("Mostrando detalles del producto seleccionado...");
-  // Aquí puedes abrir un modal o cargar detalles dinámicamente
-});
-
-// Cuando el usuario hace clic en Agregar Producto
-document.getElementById("btnAgregar").addEventListener("click", function() {
-  window.location.href = "agregar-producto.php"; // Redirige a la vista de agregar producto
-});
-*/
-
-
-let carrito = [];
-
-//  Función para agregar producto
-function agregarCarrito(nombre, precio) {
-    carrito.push({ nombre, precio });
-    mostrarCarrito();
-}
-
-//  Mostrar productos en el carrito
-function mostrarCarrito() {
-    let contenedor = document.getElementById('carrito-lista');
-    contenedor.innerHTML = '';
-
-    if (carrito.length === 0) {
-        contenedor.innerHTML = '<p class="text-muted text-center">Tu carrito está vacío</p>';
-        actualizarTotales();
-        return;
-    }
-
-    carrito.forEach((item, index) => {
-        let div = document.createElement('div');
-        div.classList.add('item');
-        div.innerHTML = `
-      <span>${item.nombre}</span>
-      <span>S/. ${item.precio.toFixed(2)}</span>
-      <button class="btn btn-sm btn-danger" onclick="eliminarItem(${index})">X</button>
-    `;
-        contenedor.appendChild(div);
-    });
-
-    actualizarTotales();
-}
-
-// Eliminar producto del carrito
-function eliminarItem(index) {
-    carrito.splice(index, 1);
-    mostrarCarrito();
-}
-
-//  Calcular totales
-function actualizarTotales() {
-    let subtotal = carrito.reduce((acc, p) => acc + p.precio, 0);
-    let igv = subtotal * 0.18;
-    let total = subtotal + igv;
-
-    document.getElementById('subtotal').textContent = `S/ ${subtotal.toFixed(2)}`;
-    document.getElementById('igv').textContent = `S/ ${igv.toFixed(2)}`;
-    document.getElementById('total').textContent = `S/ ${total.toFixed(2)}`;
-}
-
-//  Integración con tus productos cargados
-document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('btn-agregar')) {
-        let card = e.target.closest('.card-product');
-        let nombre = card.querySelector('.nombre').textContent;
-        let precio = parseFloat(card.querySelector('.precio span').textContent.replace('S/.', '').trim());
-        agregarCarrito(nombre, precio);
-    }
-});
 
 
 
