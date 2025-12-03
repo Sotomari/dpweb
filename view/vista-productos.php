@@ -6,21 +6,80 @@
         <!-- Contenedor flex para título e input en la misma línea -->
         <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
           <h5 class="card-title mb-0">Busqueda de Productos</h5>
-          <div style="width: 250px;">
+          <div style="width: 100%; max-width: 350px;">
+
             <input type="text"
               class="form-control input-busqueda"
               placeholder="Buscar producto por nombre o código"
               id="busqueda_venta"
               onkeypress="view_imagen();">
+            <input type="hidden" id="id_producto_venta">
+            <input type="hidden" id="producto_precio_venta">
+            <input type="hidden" id="producto_cantidad_venta" value ="1">
           </div>
-
         </div>
+
+        <!--  CARRUSEL  -->
+        <div class="carrusel-contenedor mt-4">
+          <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="view/include/galletas.png" class="d-block w-100" alt="img1">
+              </div>
+              <div class="carousel-item">
+                <img src="uploads/yogurt.jpg" class="d-block w-100" alt="img2">
+              </div>
+              <div class="carousel-item">
+                <img src="view/include/golosinas.png.jpg" class="d-block w-100" alt="img3">
+              </div>
+              <div class="carousel-item">
+                <img src="uploads/productos/prod_692727e115119.png" class="d-block w-100" alt="img5">
+              </div>
+               <div class="carousel-item">
+                <img src="uploads/cookies -oreo.png" class="d-block w-100" alt="img4">
+              </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+
+
         <!-- Contenedor donde se mostrarán los productos -->
         <div class="row container-fluid" id="product-image"></div>
       </div>
     </div>
   </div>
   <style>
+    .buscador-contenedor {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-busqueda {
+      width: 300px;
+      height: 35px;
+      margin-left: 10px;
+    }
+
+    .carrusel-contenedor {
+      width: 60%;
+      margin: auto;
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      border: 3px solid #00aaff91;
+      box-shadow: 0 0 10px rgba(31, 32, 32, 0.1);
+    }
+
+
     #product-image {
       display: flex;
       flex-wrap: wrap;
@@ -117,20 +176,59 @@
       font-size: 18px;
       padding: 10px;
       border-radius: 12px;
-      border: 2px solid #007bff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      border: 2px solid #121315eb;
+      box-shadow: 0 2px 6px rgba(3, 32, 253, 0.31);
       background: #f8f9fa;
       width: 350px;
       /* Reduce el ancho */
+    }
+
+    .input-busqueda {
+      width: 100% !important;
+      /* SE ADAPTA AL TAMAÑO */
+      max-width: 350px;
+      /* Tamaño máximo */
+      height: 50px;
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 12px;
+      border: 2px solid #121315eb;
+      box-shadow: 0 2px 6px rgba(3, 32, 253, 0.31);
+      background: #f8f9fa;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 600px) {
+      .input-busqueda {
+        max-width: 100% !important;
+        font-size: 16px;
+      }
+    }
+
+    .table {
+      width: 100%;
+      table-layout: fixed;
+      /* fuerza a que las columnas se ajusten */
+      word-wrap: break-word;
+    }
+
+
+
+
+    .table td,
+    .table th {
+      font-size: 10px;
+      /* Reduce texto */
     }
   </style>
   <div class="col-3">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Lista de Compra</h5>
+        <!--<h5 class="card-title">Lista de Compra</h5>-->
+        <h5 class="text-center fw-bold fs-4 mb-3">Lista de Compra</h5>
         <div class="row" style="min-height: 500px;">
-          <div class="col-12">
-            <table class="table">
+          <div class="col-12 table-responsive">
+            <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>Producto</th>
@@ -168,3 +266,11 @@
 </div>
 <script src="<?= BASE_URL ?>view/function/product.js"></script>
 <script src="<?php echo BASE_URL; ?>view/function/venta.js"></script>
+<script>
+  let input = document.getElementById("busqueda_venta");
+  input.addEventListener('keydown', (event) => {
+    if (event.key == 'Enter') {
+      agregar_producto_temporal();
+    }
+  })
+</script>

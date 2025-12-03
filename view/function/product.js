@@ -22,6 +22,7 @@ async function view_products() {
                             <td>${cont}</td>
                             <td>${producto.codigo}</td>
                             <td>${producto.nombre}</td>
+                           
                             <td>${producto.precio}</td>
                             <td>${producto.stock}</td>
                             <td>${producto.categoria}</td>
@@ -315,7 +316,7 @@ async function cargar_proveedores() {
 //para mostrar imagen de productos
 async function view_imagen() {
     try {
-      let dato = document.getElementById('busqueda_venta').value;
+        let dato = document.getElementById('busqueda_venta').value;
         const datos = new FormData();
         datos.append('dato', dato);
         let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=buscar_producto_venta', {
@@ -361,7 +362,14 @@ async function view_imagen() {
       `;
 
             product_imagens.appendChild(card);
+            let id = document.getElementById('id_producto_venta');
+            let precio = document.getElementById('producto_precio_venta');
+            let cantidad = document.getElementById('producto_cantidad_venta');
+            id.value = producto.id;
+            precio.value = producto.precio;
+            cantidad.value = 1;
         });
+
 
     } catch (error) {
         console.error('Error al obtener productos:', error);
@@ -380,28 +388,3 @@ if (document.getElementById('product-image')) {
 
 
 
-
-/*
-//venta ver en consola
-let productos_venta = {};
-let id = 2;
-let id2 =4;
-
-let producto = {};
-producto.nombre = "Producto A";
-producto.precio = 100;
-producto.cantidad = 2;
-//productos_venta.push(producto);
-
-let producto2= {};
-producto2.nombre = "Producto B";
-producto2.precio = 100;
-producto2.cantidad = 3;
-//productos_venta.push(producto);
-productos_venta[id]=producto;
-productos_venta[id2]=producto2;
-console.log(productos_venta);
-
-productos_venta.splice(id,1);
-console.log(productos_venta);
-*/

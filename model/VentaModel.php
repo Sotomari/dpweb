@@ -1,6 +1,5 @@
 <?php
 require_once("../library/conexion.php");
-
 class VentaModel
 {
     private $conexion;
@@ -11,64 +10,61 @@ class VentaModel
         $this->conexion = $this->conexion->connect();
     }
 
-    //  Ver todas las ventas
-    public function verVentas()
+  //registrar un producto
+    public function registrar_temporal($id_producto, $precio, $cantidad)
     {
-        $arr_ventas = array();
-        $consulta = "SELECT * FROM venta";
-        $sql = $this->conexion->query($consulta);
-
-        while ($objeto = $sql->fetch_object()) {
-            array_push($arr_ventas, $objeto);
+        $consulta = "INSERT INTO temporal_venta (id_producto, precio, cantidad) VALUES ('$id_producto','$precio', '$cantidad')";
+        $sql = $this->conexion->prepare($consulta);
+        if ($sql->execute()) {
+            return  $this->conexion->insert_id;
+        }else {
+            return 0;
         }
-        return $arr_ventas;
+      
     }
 
-    //  Ver una venta por ID
-    public function ver($id)
+   //atualizar
+    public function actualizarCantidadTemporal($id_producto, $cantidad)
     {
-        $id = intval($id);
-        $consulta = "SELECT * FROM venta WHERE id='$id'";
-        $sql = $this->conexion->query($consulta);
-        return $sql->fetch_object();
-    }
-
-    //  Registrar nueva venta
-    public function registrar($fecha, $total, $id_vendedor, $id_cliente, $estado)
-    {
-        $fecha       = $this->conexion->real_escape_string($fecha);
-        $total       = floatval($total);
-        $id_vendedor  = intval($id_vendedor);
-        $id_cliente  = intval($id_cliente);
-
-        $consulta = "INSERT INTO venta (fecha, total, id_vendedor, id_cliente, estado) VALUES ('$fecha', $total, $id_vendedor, $id_cliente, $estado)";
-        $sql = $this->conexion->query($consulta);
-
-        if ($sql) {
-            return $this->conexion->insert_id;
-        }
-        return 0;
-    }
-
-    //  Actualizar venta
-    public function actualizar($id_venta, $fecha, $total, $id_vendedor, $id_cliente)
-    {
-        $id_venta   = intval($id_venta);
-        $fecha      = $this->conexion->real_escape_string($fecha);
-        $total      = floatval($total);
-        $id_vendedor = intval($id_vendedor);
-        $id_cliente = intval($id_cliente);
-
-        $consulta = "UPDATE venta SET fecha='$fecha', total=$total, id_vendedor=$id_vendedor, id_cliente=$id_cliente  WHERE id='$id_venta'";
+        $consulta = "UPDATE temporal_venta SET cantidad='$cantidad' WHERE id_producto='$id_producto'";
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
 
-    // Eliminar venta
-    public function eliminar($id_venta)
+  //buscar por id
+    public function buscarTemporal($id_producto)
     {
-        $id_venta = intval($id_venta);
-        $consulta = "DELETE FROM venta WHERE id='$id_venta'";
+
+        $consulta = "SELECT * FROM temporal_venta WHERE id_producto='$id_producto'";
+        $sql = $this->conexion->query($consulta);
+        return $sql->fetch_object();
+    }
+
+      //buscar todo
+    public function buscarTemporales()
+    {
+        $arr_temporal = array();
+        $consulta = "SELECT * FROM temporal_venta";
+        $sql = $this->conexion->query($consulta);
+        while ($objeto = $sql->fetch_object()) {
+            array_push($arr_temporal_venta, $objeto);
+        }
+        return $arr_temporal();
+    }
+
+     //eliminar por id
+    public function eliminarTemporal($id_producto)
+    {
+
+        $consulta = "SELECT FROM temporal_venta WHERE id_producto='$id_producto'";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+
+   //eliminar todo
+    public function eliminarTemporales()
+    {
+        $consulta = "DELETE FROM temporal_venta'";
         $sql = $this->conexion->query($consulta);
         return $sql;
     }
