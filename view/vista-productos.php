@@ -240,14 +240,7 @@
                 </tr>
               </thead>
               <tbody id="lista_compra">
-                <tr>
-                  <td>Producto 1</td>
-                  <td>2</td>
-                  <td>$10.00</td>
-                  <td>$20.00</td>
-                  <td>$30.00</td>
-                  <td><button class="btn btn-danger btn-sm">X</button></td>
-                </tr>
+              
               </tbody>
             </table>
           </div>
