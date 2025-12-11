@@ -2,11 +2,11 @@
 <?php
 require_once("../model/ProductoModel.php");
 require_once("../model/CategoriaModel.php");
-require_once("../model/UsuarioModel.php"); // AGREGAR ESTA LÍNEA
+require_once("../model/UsuarioModel.php"); // usuario model
 
 $objProducto = new ProductoModel();
 $objCategoria = new CategoriaModel();
-$objUsuario = new UsuarioModel(); // AGREGAR ESTA LÍNEA
+$objUsuario = new UsuarioModel(); // usuario model
 
 $tipo = $_GET['tipo'];
 //registrar

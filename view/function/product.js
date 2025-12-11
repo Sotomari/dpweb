@@ -354,10 +354,12 @@ async function view_imagen() {
                 <div class="stock">
                 <strong>Stock:</strong> <span>${producto.stock}</span>
                 </div>
-                <div class="botones">
-                <button class="btn-detalle">Ver Detalle</button>
-                <button class="btn-agregar">Agregar al Carrito</button>
+              <div class="botones">
+                    <button class="btn-detalle" data-id="${producto.id}">Ver Detalle</button>
+                    <button class="btn-agregar" data-id="${producto.id}" data-precio="${producto.precio}">Agregar al Carrito</button>
                 </div>
+
+          
 
       `;
 
@@ -383,8 +385,27 @@ if (document.getElementById('product-image')) {
 
 
 
+// eventos de botones 
+document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("btn-agregar")) {
+        let id = e.target.dataset.id;
+        let precio = e.target.dataset.precio;
+        fn_agregar_carrito(id, precio);
+    }
 
+    if (e.target.classList.contains("btn-detalle")) {
+        let id = e.target.dataset.id;
+        fn_ver_detalle(id);
+    }
+});
 
+//funcion de venta al carrito 
+function fn_agregar_carrito(id, precio) {
+    alert("Producto agregado al carrito: " + id);
+}
 
+function fn_ver_detalle(id) {
+    alert("Ver detalle del producto: " + id);
+}
 
 

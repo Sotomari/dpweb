@@ -10,20 +10,19 @@ class VentaModel
         $this->conexion = $this->conexion->connect();
     }
 
-  //registrar un producto
+    //registrar un producto
     public function registrar_temporal($id_producto, $precio, $cantidad)
     {
         $consulta = "INSERT INTO temporal_venta (id_producto, precio, cantidad) VALUES ('$id_producto','$precio', '$cantidad')";
         $sql = $this->conexion->prepare($consulta);
         if ($sql->execute()) {
             return  $this->conexion->insert_id;
-        }else {
+        } else {
             return 0;
         }
-      
     }
 
-   //atualizar
+    //atualizar
     public function actualizarCantidadTemporal($id_producto, $cantidad)
     {
         $consulta = "UPDATE temporal_venta SET cantidad='$cantidad' WHERE id_producto='$id_producto'";
@@ -31,7 +30,7 @@ class VentaModel
         return $sql;
     }
 
-  //buscar por id
+    //buscar por id
     public function buscarTemporal($id_producto)
     {
 
@@ -40,7 +39,7 @@ class VentaModel
         return $sql->fetch_object();
     }
 
-      //buscar todo
+    //buscar todo
     public function buscarTemporales()
     {
         $arr_temporal = array();
@@ -52,7 +51,25 @@ class VentaModel
         return $arr_temporal();
     }
 
-     //eliminar por id
+     // ⭐⭐ LISTAR TEMPORAL (FALTABA) ⭐⭐
+    public function verTemporal()
+    {
+        $consulta = "SELECT t.id_producto, t.precio, t.cantidad, p.nombre 
+                     FROM temporal_venta t
+                     INNER JOIN productos p ON t.id_producto = p.id";
+        $sql = $this->conexion->query($consulta);
+
+        $lista = [];
+        while ($row = $sql->fetch_object()) {
+            $lista[] = $row;
+        }
+
+        return $lista;
+    }
+
+
+
+    //eliminar por id
     public function eliminarTemporal($id_producto)
     {
 
@@ -61,10 +78,36 @@ class VentaModel
         return $sql;
     }
 
-   //eliminar todo
+    //eliminar todo
     public function eliminarTemporales()
     {
-        $consulta = "DELETE FROM temporal_venta'";
+        $consulta = "DELETE FROM temporal_venta";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+
+
+
+
+
+    public function RegistrarVenta($total)
+    {
+        $consulta = "INSERT INTO ventas(total) VALUES ($total)";
+        $sql = $this->conexion->query($consulta);
+        if ($sql) {
+            return $this->conexion->insert_id;
+        }
+        return 0;
+    }
+    public function registrarDetalle($id_venta, $id_producto, $cantidad, $precio)
+    {
+        $consulta = "INSERT INTO detalle_venta (id_venta, id_producto, cantidad, precio) VALUES ($id_venta, $id_producto, $cantidad, $precio)";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+    public function limpiarTemporal()
+    {
+        $consulta = "DELETE FROM temporal_venta";
         $sql = $this->conexion->query($consulta);
         return $sql;
     }

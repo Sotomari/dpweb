@@ -45,4 +45,42 @@ async function agregar_producto_temporal() {
     } catch (error) {
         console.log("error en agregar producto temporal" + error);
     }
+
+
+
+//listar a carrito
+
+    async function listar_carrito() {
+    try {
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=ver_temporal', {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache'
+        });
+
+        let json = await respuesta.json();
+
+        if (json.status) {
+            let tabla = document.getElementById('tabla_carrito');
+            tabla.innerHTML = "";
+
+            json.data.forEach(item => {
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${item.nombre}</td>
+                        <td>${item.cantidad}</td>
+                        <td>$${item.precio}</td>
+                        <td>$${item.precio * item.cantidad}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="eliminarTemporal(${item.id_producto})">X</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+    } catch (e) {
+        console.log("Error en listar carrito", e);
+    }
+}
+
 }
