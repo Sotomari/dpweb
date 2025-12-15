@@ -57,6 +57,42 @@ class VentaModel
         }
         return $arr_temporal();
     }
+     public function eliminarTemporal($id)
+    {
+        $consulta = "DELETE FROM temporal_venta WHERE id='$id'";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+    public function eliminarTemporales()
+    {
+        $consulta = "DELETE FROM temporal_venta";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+    public function listarVentas_Temporal(){
+
+    }
+
+    //---------------------- VENTAS REGISTRADAS (OFICIALES)----------------
+    public function buscar_ultima_venta(){
+        $consulta = "SELECT codigo FROM venta ORDER BY id DESC LIMIT 1";
+        $sql = $this->conexion->query($consulta);
+        return $sql->fetch_object();
+    }
+    public function registrar_venta($codigo, $fecha_venta, $id_cliente, $id_vendedor){
+        $consulta = "INSERT INTO venta (codigo, fecha_hora, id_cliente, id_vendedor) VALUES ('$codigo', '$fecha_venta', '$id_cliente', '$id_vendedor')";
+        $sql = $this->conexion->query($consulta);
+        if($sql){
+            return $this->conexion->insert_id;
+        }
+        return 0;
+    }
+    public function registrar_detalle_venta($id_venta, $id_producto, $precio, $cantidad){
+        $consulta = "INSERT INTO detalle_venta (id_venta, id_producto, precio, cantidad) VALUES ('$id_venta', '$id_producto', '$precio', '$cantidad')";
+        $sql = $this->conexion->query($consulta);
+        return $sql;
+    }
+}
 
   
-}
+
