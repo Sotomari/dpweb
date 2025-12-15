@@ -69,7 +69,8 @@ async function listar_temporales() {
         if (json.status) {
             let lista_temporal = '';
             json.data.forEach(t_venta => {
-                lista_temporal += `<tr>
+                lista_temporal += `
+                <tr>
                                     <td>${t_venta.nombre}</td>
                                     <td><input type="number" id="cant_${t_venta.id}" value="${t_venta.cantidad}" style="width: 60px;" onkeyup="actualizar_subtotal(${t_venta.id}, ${t_venta.precio});" onchange="actualizar_subtotal(${t_venta.id}, ${t_venta.precio});"></td>
                                     <td>S/. ${t_venta.precio}</td>

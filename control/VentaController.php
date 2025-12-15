@@ -30,7 +30,7 @@ if ($tipo == "registrarTemporal") {
     echo json_encode($respuesta);
 }
 
-if ($tipo = "listar_venta_temporal") {
+if ($tipo == "listar_venta_temporal") {
     $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
     $b_producto = $objVenta->buscarTemporales();
     if ($b_producto) {
@@ -83,6 +83,17 @@ if ($tipo == "registrar_venta") {
           $respuesta = array('status' => true, 'msg' => 'venta registrada con exito');   
        } else {
         $respuesta = array('status' => false, 'msg' => 'error al registrar la venta');
+    }
+    echo json_encode($respuesta);
+}
+if ($tipo=="eliminar_temporal") {
+    $id = $_POST['id'];
+    $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
+    $consulta = $objVenta->eliminarTemporal($id);
+    if ($consulta) {
+        $respuesta = array('status' => true, 'msg' => 'eliminado');
+    } else {
+        $respuesta = array('status' => false, 'msg' => 'error al eliminar');
     }
     echo json_encode($respuesta);
 }

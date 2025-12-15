@@ -234,9 +234,8 @@
                   <th>Producto</th>
                   <th>Cantidad</th>
                   <th>Precio</th>
-                  <th>Total</th>
-                  <th>SubTotal</th>
-                  <th>AC</th>
+                  <th>Subtotal</th>
+                  <th>Acción</th>
                 </tr>
               </thead>
               <tbody id="lista_compra">
