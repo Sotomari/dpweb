@@ -43,6 +43,17 @@ class UsuarioModel
         return $sql->fetch_object();
     }
 
+    public function buscar_por_dni($dni)
+    {
+        $consulta = "SELECT id, razon_social FROM persona WHERE nro_identidad = '$dni' AND rol = 'Cliente' LIMIT 1";
+        $sql = $this->conexion->query($consulta);
+        if ($sql) {
+            return $sql->fetch_object();
+        } else {
+            return null;
+        }
+    }
+
     /*metodo para listar */
     public function verUsuarios()
     {

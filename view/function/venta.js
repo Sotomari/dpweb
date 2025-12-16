@@ -144,6 +144,7 @@ async function buscar_cliente_venta() {
             body: datos
         });
         json = await respuesta.json();
+        console.log('Respuesta buscar cliente:', json);
         if (json.status) {
             document.getElementById('cliente_nombre').value = json.data.razon_social;
             document.getElementById('id_cliente_venta').value = json.data.id;
@@ -155,6 +156,26 @@ async function buscar_cliente_venta() {
     }
 }
 
+
+async function eliminarTemporal(id) {
+    try {
+        const datos = new FormData();
+        datos.append('id', id);
+        let respuesta = await fetch(base_url + 'control/VentaController.php?tipo=eliminar_temporal', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+        json = await respuesta.json();
+        if (json.status) {
+            listar_temporales();
+            act_subt_general();
+        }
+    } catch (error) {
+        console.log("error al eliminar temporal: " + error);
+    }
+}
 
 async function registrarVenta() {
     let id_cliente = document.getElementById('id_cliente_venta').value;
@@ -184,3 +205,4 @@ async function registrarVenta() {
         console.log("error al registrar venta " + error);
     }
 }
+

@@ -207,3 +207,16 @@ if ($tipo == "ver_proveedores") {
    }
    echo json_encode($respuesta);
 }
+
+//buscar cliente por dni
+if ($tipo == "buscar_por_dni") {
+   $dni = $_POST['dni'];
+   $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
+   $cliente = $objPersona->buscar_por_dni($dni);
+   if ($cliente) {
+      $respuesta = array('status' => true, 'data' => $cliente);
+   } else {
+      $respuesta = array('status' => false, 'msg' => 'Cliente no encontrado');
+   }
+   echo json_encode($respuesta);
+}

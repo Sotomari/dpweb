@@ -281,7 +281,7 @@
             </div>
             <div class="col-md-3">
               <label for="fecha_venta">fecha de venta</label>
-              <input type="datetime" class="form-control" id="fecha_venta" name="fecha_venta" value="<?= date('Y-m-d H:i') ?>">
+              <input type="datetime-local" class="form-control" id="fecha_venta" name="fecha_venta" value="<?= date('Y-m-d\TH:i') ?>">
             </div>
           </div>
         </form>
@@ -294,8 +294,8 @@
   </div>
 </div>
 
-<script src="<?= BASE_URL ?>view/function/product.js"></script>
 <script src="<?php echo BASE_URL; ?>view/function/venta.js"></script>
+<script src="<?= BASE_URL ?>view/function/product.js"></script>
 <script>
   let input = document.getElementById("busqueda_venta");
   input.addEventListener('keydown', (event) => {

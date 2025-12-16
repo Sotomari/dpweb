@@ -291,27 +291,7 @@ async function cargar_proveedores() {
     document.getElementById("id_proveedor").innerHTML = contenido;
 }
 
-/*
 
-async function cargar_proveedores() {
-    let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=ver_proveedores', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-    });
-
-    let json = await respuesta.json();
-    let contenido = '<option value="">Seleccione proveedor</option>';
-
-    if (json.status) {
-        json.data.forEach(proveedor => {
-            contenido += `<option value="${proveedor.id}">${proveedor.razon_social}</option>`;
-        });
-    }
-
-    document.getElementById("id_proveedor").innerHTML = contenido;
-}
-*/
 
 //para mostrar imagen de productos
 async function view_imagen() {
@@ -356,7 +336,7 @@ async function view_imagen() {
                 </div>
               <div class="botones">
                     <button class="btn-detalle" data-id="${producto.id}">Ver Detalle</button>
-                    <button class="btn-agregar" data-id="${producto.id}" data-precio="${producto.precio}">Agregar al Carrito</button>
+               <button onclick="agregar_producto_temporal(${producto.id},${producto.precio},1)" class="btn btn-primary">Agregar al Carrito</button>
                 </div>
 
           
@@ -384,7 +364,7 @@ if (document.getElementById('product-image')) {
 }
 
 
-
+/*
 // eventos de botones 
 document.addEventListener("click", function (e) {
     if (e.target.classList.contains("btn-agregar")) {
@@ -401,11 +381,14 @@ document.addEventListener("click", function (e) {
 
 //funcion de venta al carrito 
 function fn_agregar_carrito(id, precio) {
-    alert("Producto agregado al carrito: " + id);
+    document.getElementById('id_producto_venta').value = id;
+    document.getElementById('producto_precio_venta').value = precio;
+    document.getElementById('producto_cantidad_venta').value = 1;
+    agregar_producto_temporal();
 }
 
 function fn_ver_detalle(id) {
     alert("Ver detalle del producto: " + id);
 }
-
+*/
 
