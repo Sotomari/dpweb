@@ -110,6 +110,10 @@ if ($tipo == "ver") {
     $id_producto = $_POST['id_producto'];
     $producto = $objProducto->ver($id_producto);
     if ($producto) {
+        $categoria = $objCategoria->ver($producto->id_categoria);
+        $proveedor = $objUsuario->ver($producto->id_proveedor);
+        $producto->categoria = $categoria->nombre;
+        $producto->proveedor = $proveedor->razon_social;
         $respuesta['status'] = true;
         $respuesta['data'] = $producto;
     } else {

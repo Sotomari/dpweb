@@ -144,7 +144,6 @@ async function buscar_cliente_venta() {
             body: datos
         });
         json = await respuesta.json();
-        console.log('Respuesta buscar cliente:', json);
         if (json.status) {
             document.getElementById('cliente_nombre').value = json.data.razon_social;
             document.getElementById('id_cliente_venta').value = json.data.id;

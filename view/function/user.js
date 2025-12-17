@@ -162,7 +162,7 @@ async function eliminar(id) {
         alert("Oooooops, ocurrio un error al eliminar persona, intentelo mas tarde");
         console.log(json.msg);
         return;
-    }else{
+    } else {
         alert(json.msg);
         location.replace(base_url + 'users');
     }
@@ -222,7 +222,7 @@ if (document.querySelector('#frm_edit_user')) {
 
 
 async function actualizarUsuario() {
-     let frm_edit_user = document.querySelector('#frm_edit_user');
+    let frm_edit_user = document.querySelector('#frm_edit_user');
     const datos = new FormData(frm_edit_user);
     let respuesta = await fetch(base_url + 'control/UsuarioController.php?tipo=actualizar', {
         method: 'POST',
@@ -350,17 +350,17 @@ async function view_clientes() {
                 nueva_fila.id = "fila" + usuario.id;
                 nueva_fila.className = "filas_tabla";
                 nueva_fila.innerHTML = `
-                            <td>${cont}</td>
-                            <td>${usuario.nro_identidad}</td>
-                            <td>${usuario.razon_social}</td>
-                            <td>${usuario.correo}</td>
-                            <td>${usuario.rol}</td>
-                            <td>${estado}</td>
-                            <td class="text-center">
-                                <a href="`+ base_url + `edit-user/` + usuario.id + `" class="btn btn-primary btn-sm">Editar</a>
-                                <button class="btn btn-danger btn-sm" onclick="fn_eliminar(` + usuario.id + `);">Eliminar</button>
-                            </td>
-                `;
+                 <td>${cont}</td>
+                 <td>${usuario.nro_identidad}</td>
+                 <td>${usuario.razon_social}</td>
+                 <td>${usuario.correo}</td>
+                 <td>${usuario.rol}</td>
+                 <td>${estado}</td>
+                  <td class="text-center">
+                    <a href="${base_url}edit-user/${usuario.id}" class="btn btn-primary btn-sm">Editar</a>
+                    <button class="btn btn-danger btn-sm" onclick="fn_eliminar(${usuario.id});">Eliminar</button>
+    </td>
+`;
                 cont++;
                 contenidot.appendChild(nueva_fila);
             });

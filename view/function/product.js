@@ -128,38 +128,7 @@ async function registrarProducto() {
     }
 }
 
-/*
 
-// Agrega el evento click a los botones de eliminar
-document.querySelectorAll('.btn-eliminar').forEach(btn => {
-    btn.addEventListener('click', async function () {
-        if (confirm('¿Está seguro de eliminar este producto?')) {
-            const datos = new FormData();
-            datos.append('id', this.getAttribute('data-id'));
-            let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=eliminar', {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                body: datos
-            });
-            let json = await respuesta.json();
-            alert(json.msg);
-            if (json.status) {
-                view_products(); // Recarga la lista
-            }
-        }
-    });
-});
-
-
-
-
-
-// Cargar productos al cargar la página
-if (document.getElementById('content_product')) {
-    view_products();
-}
-*/
 /* para editar producto */
 async function edit_product() {
     try {
@@ -309,11 +278,6 @@ async function view_imagen() {
 
 
 
-        /* Verifica que haya datos
-        if (!json.status || !Array.isArray(json.data)) {
-            console.error('No se encontraron productos o formato incorrecto:', json);
-            return;
-        }*/
 
         let json = await respuesta.json();
         let product_imagens = document.getElementById('product-image');
@@ -335,8 +299,8 @@ async function view_imagen() {
                 <strong>Stock:</strong> <span>${producto.stock}</span>
                 </div>
               <div class="botones">
-                    <button class="btn-detalle" data-id="${producto.id}">Ver Detalle</button>
-               <button onclick="agregar_producto_temporal(${producto.id},${producto.precio},1)" class="btn btn-primary">Agregar al Carrito</button>
+                    <button class="btn-detalle" onclick="fn_ver_detalle(${producto.id})">Ver Detalle</button>
+               <button onclick="agregar_producto_temporal(${producto.id},${producto.precio},1)" class="btn-agregar">Agregar al Carrito</button>
                 </div>
 
           
@@ -358,37 +322,45 @@ async function view_imagen() {
     }
 }
 
+// Función para ver detalles del producto
+async function fn_ver_detalle(id) {
+    try {
+        const datos = new FormData();
+        datos.append('id_producto', id);
+        let respuesta = await fetch(base_url + 'control/ProductoController.php?tipo=ver', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            body: datos
+        });
+        json = await respuesta.json();
+        if (json.status) {
+            let producto = json.data;
+            document.getElementById('detalle-imagen').src = producto.imagen;
+            document.getElementById('detalle-nombre').innerText = producto.nombre;
+            document.getElementById('detalle-detalle').innerText = producto.detalle;
+            document.getElementById('detalle-precio').innerText = producto.precio;
+            document.getElementById('detalle-stock').innerText = producto.stock;
+            document.getElementById('detalle-codigo').innerText = producto.codigo;
+            document.getElementById('detalle-categoria').innerText = producto.categoria;
+            document.getElementById('detalle-proveedor').innerText = producto.proveedor;
+            document.getElementById('detalle-fecha').innerText = producto.fecha_vencimiento;
+            // Mostrar el modal
+            let modal = new bootstrap.Modal(document.getElementById('modalDetalleProducto'));
+            modal.show();
+        } else {
+            alert('Producto no encontrado');
+        }
+    } catch (error) {
+        console.error('Error al obtener detalles del producto:', error);
+    }
+}
+
 // Cargar productos al iniciar
 if (document.getElementById('product-image')) {
     view_imagen();
 }
 
 
-/*
-// eventos de botones 
-document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("btn-agregar")) {
-        let id = e.target.dataset.id;
-        let precio = e.target.dataset.precio;
-        fn_agregar_carrito(id, precio);
-    }
 
-    if (e.target.classList.contains("btn-detalle")) {
-        let id = e.target.dataset.id;
-        fn_ver_detalle(id);
-    }
-});
-
-//funcion de venta al carrito 
-function fn_agregar_carrito(id, precio) {
-    document.getElementById('id_producto_venta').value = id;
-    document.getElementById('producto_precio_venta').value = precio;
-    document.getElementById('producto_cantidad_venta').value = 1;
-    agregar_producto_temporal();
-}
-
-function fn_ver_detalle(id) {
-    alert("Ver detalle del producto: " + id);
-}
-*/
 

@@ -63,7 +63,7 @@
                     <label for="rol" class="col-sm-2 col-form-label">rol:</label>
                     <div class="col-sm-8">
                         <select class="form-control" id="rol" name="rol" style="border: 2px solid blue;" required readonly>
-                         <option value="Cliente" selected>Cliente</option>
+                         <option value="Clientes" selected>Clientes</option>
                         </select>
                     </div>
                 </div>

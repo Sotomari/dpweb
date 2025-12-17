@@ -43,16 +43,16 @@ class UsuarioModel
         return $sql->fetch_object();
     }
 
-    public function buscar_por_dni($dni)
-    {
-        $consulta = "SELECT id, razon_social FROM persona WHERE nro_identidad = '$dni' AND rol = 'Cliente' LIMIT 1";
-        $sql = $this->conexion->query($consulta);
-        if ($sql) {
-            return $sql->fetch_object();
-        } else {
-            return null;
-        }
+ public function buscar_por_dni($dni)
+{
+    $consulta = "SELECT id, razon_social FROM persona WHERE dni = '$dni' AND rol = 'Clientes' LIMIT 1";
+    $sql = $this->conexion->query($consulta);
+    if ($sql) {
+        return $sql->fetch_object();
+    } else {
+        return null;
     }
+}
 
     /*metodo para listar */
     public function verUsuarios()
@@ -70,24 +70,7 @@ class UsuarioModel
 
 
 
-    /*
-public function verProveedor()
-{
-    $arr_proveedor = array();
-
-    //  Solo trae los usuarios cuyo rol sea "Proveedor"
-    $consulta = "SELECT id, razon_social FROM persona WHERE rol = 'Proveedor'";
-    $sql = $this->conexion->query($consulta);
-
-    while ($objeto = $sql->fetch_object()) {
-        $arr_proveedor[] = $objeto;
-    }
-    return $arr_proveedor;
-}
-
-*/
-
-
+    
     //creando una nueva funcion ver
     public function ver($id)
     {
@@ -113,7 +96,7 @@ public function verProveedor()
         //verclientes
    public function verClientes(){
         $arr_usuarios = array();
-        $consulta = "SELECT * FROM persona WHERE rol = 'cliente'";
+        $consulta = "SELECT * FROM persona WHERE rol = 'Clientes'";
         $sql = $this->conexion->query($consulta);
         while ($objeto = $sql->fetch_object()) {
             array_push($arr_usuarios, $objeto);

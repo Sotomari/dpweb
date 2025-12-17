@@ -208,15 +208,33 @@ if ($tipo == "ver_proveedores") {
    echo json_encode($respuesta);
 }
 
-//buscar cliente por dni
+// Buscar cliente por DNI para ventas
 if ($tipo == "buscar_por_dni") {
-   $dni = $_POST['dni'];
-   $respuesta = array('status' => false, 'msg' => 'fallo el controlador');
-   $cliente = $objPersona->buscar_por_dni($dni);
-   if ($cliente) {
-      $respuesta = array('status' => true, 'data' => $cliente);
-   } else {
-      $respuesta = array('status' => false, 'msg' => 'Cliente no encontrado');
-   }
-   echo json_encode($respuesta);
+    $dni = isset($_POST['dni']) ? trim($_POST['dni']) : '';
+    
+    if ($dni == "") {
+        $respuesta = array('status' => false, 'msg' => 'Error, DNI vacío');
+    } else {
+        // Usar el método buscar_por_dni del modelo
+        $persona = $objPersona->buscar_por_dni($dni);
+        
+        if ($persona) {
+            $respuesta = array(
+                'status' => true, 
+                'msg' => 'Cliente encontrado',
+                'data' => array(
+                    'id' => $persona->id,
+                    'razon_social' => $persona->razon_social,
+                    'nro_identidad' => $persona->nro_identidad,
+                    'telefono' => isset($persona->telefono) ? $persona->telefono : '',
+                    'correo' => isset($persona->correo) ? $persona->correo : ''
+                )
+            );
+        } else {
+            $respuesta = array('status' => false, 'msg' => 'Cliente no encontrado con DNI: ' . $dni);
+        }
+    }
+    
+    echo json_encode($respuesta);
+    exit;
 }
