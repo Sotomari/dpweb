@@ -285,7 +285,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="fecha_venta">fecha de venta</label>
-                            <input type="datetime" class="form-control" id="fecha_venta" name="fecha_venta" value="<?= date('Y-m-d H:i') ?>">
+                        <input type="datetime-local" class="form-control" id="fecha_venta" name="fecha_venta" value="<?= date('Y-m-d\TH:i') ?>">
                         </div>
                     </div>
                 </form>
